@@ -1,6 +1,6 @@
 # Adaptive Size
 
-[![Codecov Coverage](https://img.shields.io/codecov/c/github/jeslage/adaptive-size.svg?style=shield)](https://codecov.io/gh/jeslage/adaptive-size/)
+[![codecov](https://codecov.io/gh/jeslage/adaptive-size/branch/master/graph/badge.svg?token=TJJFPD677O)](https://codecov.io/gh/jeslage/adaptive-size)
 [![CircleCI](https://circleci.com/gh/jeslage/adaptive-size.svg?style=shield)](https://circleci.com/gh/jeslage/adaptive-size)
 
 A small javascript helper to get an adaptive font-size css string. It will interpolate between the given sizes and screen widths.
