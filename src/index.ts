@@ -1,7 +1,7 @@
 export interface Config {
   size: number[];
-  lineHeight: number[];
-  width: [number, number];
+  width: number[];
+  lineHeight?: number[];
   breakpoints?: number;
   property?: string;
 }
