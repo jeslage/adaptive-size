@@ -4,7 +4,7 @@
 [![Codecov Coverage](https://img.shields.io/codecov/c/github/jeslage/adaptive-size.svg?style=shield)](https://codecov.io/gh/jeslage/adaptive-size/)
 [![CircleCI](https://circleci.com/gh/jeslage/adaptive-size.svg?style=shield)](https://circleci.com/gh/jeslage/adaptive-size)
 
-A small javascript helper to get an adaptive modular scale font-size css string. It will interpolate between two modular scales and breakpoints and will return you sizes based on the given modular scales. This package is inspired by this [tool](https://codepen.io/tol-is/pen/mQVLPY) by Florian Schulz.
+A small javascript helper to get an adaptive font-size css string. It will interpolate between the given sizes and screen widths.
 
 ```bash
 yarn add adaptive-size
