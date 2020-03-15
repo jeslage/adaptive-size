@@ -1,6 +1,5 @@
-# Adaptive Modular Scale
+# Adaptive Size
 
-[![npm version](https://badge.fury.io/js/adaptive-size.svg)](https://www.npmjs.com/package/adaptive-size)
 [![Codecov Coverage](https://img.shields.io/codecov/c/github/jeslage/adaptive-size.svg?style=shield)](https://codecov.io/gh/jeslage/adaptive-size/)
 [![CircleCI](https://circleci.com/gh/jeslage/adaptive-size.svg?style=shield)](https://circleci.com/gh/jeslage/adaptive-size)
 
