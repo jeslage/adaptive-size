@@ -110,7 +110,7 @@ Array of screen widths in px.
 
 `number[]` | required
 
-Array of line-heights.
+Array of line-height values, e.g. 1.4.
 
 ### `breakpoints`
 
