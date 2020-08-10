@@ -20,13 +20,13 @@ import adaptiveSize from 'adaptive-size';
 const Headline = styled.h1`
   ${adaptiveSize({
     // Sizes in px to interpolate between
-    size: [20, 45, 60],
-    // Screen widths to interpolate between
-    width: [800, 1200, 1400],
+    sizes: [20, 45, 60],
+    // Breakpoints to interpolate between
+    breakpoints: [800, 1200, 1400],
     // Line heights
-    lineHeight?: [1.5, 1.6, 1.5],
-    // Number of breakpoints between steps
-    breakpoints?: 4,
+    lineHeights?: [1.5, 1.6, 1.5],
+    // Steps between each breakpoint
+    breakpoints?: 12,
   })}
 `;
 ```
@@ -72,53 +72,28 @@ The above example will return the following css.
 }
 ```
 
-## Custom css property
-
-By default `adaptive-size` uses `font-size` as the css property. But you can also change the property by adding a `property` key to your config object.
-
-**Example**
-
-```js
-import styled, { ThemeProvider } from 'styled-components';
-import adaptiveSize from 'adaptive-size';
-
-const Headline = styled.h1`
-  ${adaptiveSize({
-    size: [20, 45, 60],
-    width: [800, 1200, 1400],
-    property: 'margin-left'
-  })}
-`;
-```
-
 ## Options
 
-### `size`
+### `sizes`
 
 `number[]` | required
 
 Array of sizes in px to interpolate between.
 
-### `width`
+### `breakpoints`
 
 `number[]` | required
 
 Array of screen widths in px.
 
-### `lineHeight`
+### `lineHeights`
 
 `number[]` | required
 
 Array of line-height values, e.g. 1.4.
 
-### `breakpoints`
+### `steps`
 
 `number` | optional | default: 8
 
-Number of breakpoints between the given screen widths which will be rendered to the css string.
-
-### `property`
-
-`string` | optional | default: "font-size"
-
-Add optional css property if you want to use adaptive size for another property than font-size.
+Steps between the given screen widths which will be rendered to the css string.
