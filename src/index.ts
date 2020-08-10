@@ -1,10 +1,20 @@
-export interface Config {
-  size: number[];
-  width: number[];
-  lineHeight?: number[];
-  breakpoints?: number;
-  property?: string;
+export interface AdaptiveSizeOptions {
+  sizes: number[];
+  breakpoints: number[];
+  lineHeights?: number[];
+  steps?: number;
 }
+
+type BreakpointItem = {
+  fontSize: string;
+  lineHeight?: number;
+};
+
+type AdaptiveSizeKeys = 'fontSize' | 'lineHeight' | string;
+
+export type AdaptiveSizeStyles = {
+  [key in AdaptiveSizeKeys]: string | number | BreakpointItem;
+};
 
 const interpolate = (
   width: number,
@@ -26,46 +36,60 @@ export const px2rem = (px: number): string => `${(px / 16).toFixed(4)}rem`;
 
 /**
  * Returns adaptive css font-size string
- * @param  {object} config - Config object with size, lineHeight, width and breakpoints key
- * @example adaptiveSize({ width: [14, 16], lineHeight: [1.4, 1.67], width: [320, 960], breakpoints: 10 })
+ * @param  {object} options - Options object with sizes, lineHeights, breakpoints and steps key
+ * @example adaptiveSize({ sizes: [14, 16], lineHeights: [1.4, 1.67], breakpoints: [320, 960], steps: 10 })
  * @returns {string} Resulting adaptive css font-size string
  */
-export const adaptiveSize = (config: Config): string => {
-  const { size, width, breakpoints, lineHeight } = config;
+export const adaptiveSize = (options: AdaptiveSizeOptions): AdaptiveSizeStyles => {
+  const { sizes, breakpoints, steps, lineHeights } = options;
 
-  const cssProp = config && config.property ? config.property : 'font-size';
+  const mediaQueries = {};
 
-  let mediaQueries = ``;
+  for (let i = 1; i < sizes.length; i += 1) {
+    const partialStep = (breakpoints[i] - breakpoints[i - 1]) / (steps || 8);
 
-  for (let i = 1; i < size.length; i += 1) {
-    const steps = (width[i] - width[i - 1]) / (breakpoints || 8);
+    const startIndex = i === 1 ? breakpoints[i - 1] + partialStep : breakpoints[i - 1];
+    const endIndex =
+      i === sizes.length - 1 ? breakpoints[i] : breakpoints[i] - partialStep;
 
-    const startIndex = i === 1 ? width[i - 1] + steps : width[i - 1];
-    const endIndex = i === size.length - 1 ? width[i] : width[i] - steps;
+    for (let j = startIndex; parseFloat(j.toFixed(0)) <= endIndex; j += partialStep) {
+      const value = interpolate(
+        j,
+        breakpoints[i - 1],
+        breakpoints[i],
+        sizes[i - 1],
+        sizes[i]
+      );
 
-    for (let j = startIndex; parseFloat(j.toFixed(0)) <= endIndex; j += steps) {
-      const value = interpolate(j, width[i - 1], width[i], size[i - 1], size[i]);
-
-      const lh = lineHeight
-        ? `line-height: ${interpolate(
-            j,
-            width[i - 1],
-            width[i],
-            lineHeight[i - 1],
-            lineHeight[i]
-          ).toFixed(2)};`
-        : '';
+      const lh = lineHeights
+        ? {
+            lineHeight: parseFloat(
+              interpolate(
+                j,
+                breakpoints[i - 1],
+                breakpoints[i],
+                lineHeights[i - 1],
+                lineHeights[i]
+              ).toFixed(2)
+            )
+          }
+        : undefined;
 
       const mq = px2rem(j);
       const fontSize = px2rem(value);
 
-      mediaQueries += `@media (min-width: ${mq}) { ${cssProp}: ${fontSize}; ${lh} }`;
+      mediaQueries[`@media (min-width: ${mq})`] = {
+        fontSize: `${fontSize}`,
+        ...lh
+      };
     }
   }
 
-  return `${cssProp}: ${px2rem(size[0])}; ${
-    lineHeight ? `line-height: ${lineHeight[0]};` : ''
-  } ${mediaQueries}`;
+  return {
+    fontSize: px2rem(sizes[0]),
+    ...(lineHeights ? { lineHeight: lineHeights[0] } : undefined),
+    ...mediaQueries
+  };
 };
 
 export default adaptiveSize;
