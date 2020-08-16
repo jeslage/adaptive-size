@@ -34,6 +34,7 @@
     "react-dom": "^16.12.0",
     "react-toast-notifications": "^2.2.5",
     "react-vis": "^1.11.7",
+    "recoil": "^0.0.10",
     "styled-components": "^5.1.1",
     "webpack": "^4.41.2"
   }

@@ -1,25 +1,31 @@
-import React, { useState, useContext, FC } from "react";
+import React, { useState, FC } from "react";
 
-import { SettingsContext } from "../../../../contexts";
+import {
+  useItemsState,
+  useBreakpointsState,
+  useFontsState,
+  Item
+} from "../../../../state";
 
 import Range from "../../../Range";
 import Counter from "../../../Counter";
-
-import StyledInlineSettings from "./InlineSettings.style";
-import { SettingsItem } from "../../../../contexts/SettingsProvider/definitions";
 import Icon from "../../../Icon";
 import Select from "../../../Select";
 import Fieldset from "../../../Fieldset";
 
+import StyledInlineSettings from "./InlineSettings.style";
+
 export type InlineSettingsProps = {
-  item: SettingsItem;
+  item: Item;
 };
 
 const InlineSettings: FC<InlineSettingsProps> = ({ item, children }) => {
   const [isEntered, setIsEntered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  const { updateItem, fonts, breakpoints } = useContext(SettingsContext);
+  const { fonts } = useFontsState();
+  const { updateItem } = useItemsState();
+  const { breakpoints } = useBreakpointsState();
 
   return (
     <StyledInlineSettings
@@ -55,7 +61,7 @@ const InlineSettings: FC<InlineSettingsProps> = ({ item, children }) => {
                 fonts && fonts.length > 0
                   ? fonts.map((item) => ({
                       label: item.name,
-                      value: item.id,
+                      value: item.id
                     }))
                   : []
               }
@@ -70,7 +76,7 @@ const InlineSettings: FC<InlineSettingsProps> = ({ item, children }) => {
               steps={1}
               onChange={(val) => {
                 updateItem(item.id, {
-                  letterSpacing: val,
+                  letterSpacing: val
                 });
               }}
             />
@@ -89,7 +95,7 @@ const InlineSettings: FC<InlineSettingsProps> = ({ item, children }) => {
                       sizes: item.sizes.map((e, j) => {
                         if (j !== index) return e;
                         return val;
-                      }),
+                      })
                     })
                   }
                 />
@@ -105,7 +111,7 @@ const InlineSettings: FC<InlineSettingsProps> = ({ item, children }) => {
                       lineHeights: item.lineHeights.map((e, j) => {
                         if (j !== index) return e;
                         return Math.round(val * 10) / 10;
-                      }),
+                      })
                     })
                   }
                 />

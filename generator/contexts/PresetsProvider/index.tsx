@@ -1,14 +1,20 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 
 import { encodeConfig, decodeConfig } from "../../helper";
-import { SettingsContext } from "../SettingsProvider";
 
 import { PresetsContextProps, Preset } from "./definitions";
+import {
+  useStepsState,
+  useProjectState,
+  useBreakpointsState,
+  useFontsState,
+  useItemsState
+} from "../../state";
 
 const defaultPresetContext = {
   presets: [],
   addPreset: () => {},
-  removePreset: () => {},
+  removePreset: () => {}
 };
 
 export const PresetsContext = React.createContext<PresetsContextProps>(
@@ -18,9 +24,11 @@ export const PresetsContext = React.createContext<PresetsContextProps>(
 const PresetsProvider = ({ children }) => {
   const [presets, setPresets] = useState<Preset[]>([]);
 
-  const { breakpoints, steps, fonts, items, project } = useContext(
-    SettingsContext
-  );
+  const { steps } = useStepsState();
+  const { project } = useProjectState();
+  const { fonts } = useFontsState();
+  const { items } = useItemsState();
+  const { breakpoints } = useBreakpointsState();
 
   useEffect(() => {
     const initialPresets = window.localStorage.getItem("presets");
@@ -38,7 +46,7 @@ const PresetsProvider = ({ children }) => {
   const addPreset = () => {
     const obj = {
       dateCreated: Date.now(),
-      settings: { fonts, breakpoints, steps, items, project },
+      settings: { fonts, breakpoints, steps, items, project }
     };
 
     setPresets((prev) => [obj, ...prev]);
@@ -57,7 +65,7 @@ const PresetsProvider = ({ children }) => {
       value={{
         presets,
         addPreset,
-        removePreset,
+        removePreset
       }}
     >
       {children}

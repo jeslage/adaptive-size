@@ -1,15 +1,20 @@
-import React, { useContext, FC, useState, useEffect, useMemo } from "react";
+import React, { FC, useState, useEffect, useMemo } from "react";
 import throttle from "lodash.throttle";
+import Head from "next/head";
 
-import { SettingsContext } from "../../contexts";
-import { defaultConfig } from "../../contexts/SettingsProvider";
+import {
+  useStepsState,
+  useProjectState,
+  useBreakpointsState,
+  useFontsState,
+  useItemsState,
+  defaultConfig
+} from "../../state";
 
 import StyledText from "./Text.style";
 import InlineSettings from "./subcomponents/InlineSettings/InlineSettings";
 import TextType from "../TextType";
 import { getFontStyle } from "../../helper";
-import Head from "next/head";
-
 export interface TextProps {
   className?: string;
 }
@@ -31,14 +36,11 @@ const InnerWidth = () => {
 };
 
 const Text: FC<TextProps> = ({ className }) => {
-  const {
-    items,
-    fonts,
-    breakpoints,
-    steps,
-    project,
-    updateProject
-  } = useContext(SettingsContext);
+  const { project, updateProject } = useProjectState();
+  const { steps } = useStepsState();
+  const { fonts } = useFontsState();
+  const { items } = useItemsState();
+  const { breakpoints } = useBreakpointsState();
 
   const renderFonts = useMemo(
     () => (

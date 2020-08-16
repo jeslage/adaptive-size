@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
 
-import { SettingsContext } from "../../contexts";
 import { getFontExtension } from "../../helper";
 
 import Upload from "../Upload";
 import IconButton from "../IconButton";
 import Fieldset from "../Fieldset";
+import { useFontsState } from "../../state";
 
 const StyledFontList = styled(Fieldset)`
   margin-top: var(--spacings-m);
@@ -47,7 +47,7 @@ const StyledFontList = styled(Fieldset)`
 `;
 
 const FontList = () => {
-  const { fonts, addFont, removeFont } = useContext(SettingsContext);
+  const { fonts, addFont, removeFont } = useFontsState();
 
   const handleFileUpload = (e: any) => {
     [...e.target.files].forEach((file) => {
@@ -58,7 +58,7 @@ const FontList = () => {
         if (item.target?.result) {
           addFont({
             ...getFontExtension(file.name),
-            base: item.target.result.toString().split("data:;")[1]
+            base: item.target.result.toString()
           });
         }
       };

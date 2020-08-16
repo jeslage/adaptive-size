@@ -3,9 +3,8 @@ import { useToasts } from "react-toast-notifications";
 import Head from "next/head";
 import pascalcase from "pascalcase";
 
-import { PresetsContext, SettingsContext } from "../../contexts";
-import { defaultConfig } from "../../contexts/SettingsProvider";
-import { Settings } from "../../contexts/SettingsProvider/definitions";
+import { useUpdateState, defaultConfig, Settings } from "../../state";
+import { PresetsContext } from "../../contexts";
 
 import Button from "../Button";
 import Preset from "../Preset";
@@ -16,7 +15,8 @@ import TextType from "../TextType";
 
 const PresetList = () => {
   const { addToast } = useToasts();
-  const { updateAllSettings } = useContext(SettingsContext);
+
+  const { updateAllSettings } = useUpdateState();
   const { addPreset, removePreset, presets } = useContext(PresetsContext);
 
   const handleExport = async (item: Settings) => {
@@ -41,12 +41,12 @@ const PresetList = () => {
 
       addToast("Exported config successfully", {
         appearance: "success",
-        autoDismiss: true,
+        autoDismiss: true
       });
     } catch (err) {
       addToast("Something went wrong", {
         appearance: "error",
-        autoDismiss: true,
+        autoDismiss: true
       });
     }
   };
@@ -63,7 +63,7 @@ const PresetList = () => {
 
             const {
               dateCreated,
-              settings: { items, fonts, breakpoints, steps, project },
+              settings: { items, fonts, breakpoints, steps, project }
             } = decodedSettings;
 
             const fontNumber = fonts?.length || 0;
@@ -86,7 +86,7 @@ const PresetList = () => {
                   onClick={() => {
                     addToast("Settings updated", {
                       appearance: "success",
-                      autoDismiss: true,
+                      autoDismiss: true
                     });
 
                     updateAllSettings(preset.settings);
@@ -97,7 +97,7 @@ const PresetList = () => {
                       icon: "save",
                       callback: () => {
                         handleExport(decodedSettings.settings);
-                      },
+                      }
                     },
                     {
                       label: "Remove preset",
@@ -105,11 +105,11 @@ const PresetList = () => {
                       callback: () => {
                         addToast("Preset removed successfully", {
                           appearance: "success",
-                          autoDismiss: true,
+                          autoDismiss: true
                         });
                         removePreset(dateCreated);
-                      },
-                    },
+                      }
+                    }
                   ]}
                 >
                   {items &&

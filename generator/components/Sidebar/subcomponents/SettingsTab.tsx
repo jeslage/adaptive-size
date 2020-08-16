@@ -1,8 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useToasts } from "react-toast-notifications";
 
-import { SettingsContext } from "../../../contexts";
+import {
+  useBreakpointsState,
+  useFontsState,
+  useItemsState,
+  useResetState
+} from "../../../state";
 
 import Counter from "../../Counter";
 import Range from "../../Range";
@@ -31,7 +36,9 @@ const StyledSettingsBar = styled.div`
 
 const SettingsBar = () => {
   const { addToast } = useToasts();
-  const { resetSettings, addItem } = useContext(SettingsContext);
+
+  const { addItem } = useItemsState();
+  const { resetSettings } = useResetState();
 
   const reset = () => {
     addToast("Settings resetted", {
@@ -59,9 +66,9 @@ const SettingsBar = () => {
 };
 
 const SettingsTab = () => {
-  const { breakpoints, fonts, removeItem, updateItem, items } = useContext(
-    SettingsContext
-  );
+  const { fonts } = useFontsState();
+  const { items, removeItem, updateItem } = useItemsState();
+  const { breakpoints } = useBreakpointsState();
 
   return (
     <SidebarContent bar={<SettingsBar />}>

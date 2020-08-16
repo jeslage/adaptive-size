@@ -1,4 +1,4 @@
-import { Settings } from "../SettingsProvider/definitions";
+import { Settings } from "../../state";
 
 export type Preset = {
   dateCreated: number;

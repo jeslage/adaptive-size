@@ -7,11 +7,12 @@ import GlobalStyle from "../styles/global";
 
 import { mq } from "../styles";
 
-import { PresetsProvider, SettingsProvider } from "../contexts";
+import { PresetsProvider } from "../contexts";
 
 import Text from "../components/Text";
 import Sidebar from "../components/Sidebar";
 import Toast from "../components/Toast";
+import useSettingsStorage from "../hooks/useSettingsStorage";
 
 const StyledHome = styled.main`
   background: var(--colors-white);
@@ -29,8 +30,10 @@ const StyledHome = styled.main`
   }
 `;
 
-const IndexPage = () => (
-  <SettingsProvider>
+const IndexPage = () => {
+  useSettingsStorage();
+
+  return (
     <ToastProvider
       autoDismissTimeout={2000}
       placement="bottom-center"
@@ -47,7 +50,7 @@ const IndexPage = () => (
         <GlobalStyle />
       </PresetsProvider>
     </ToastProvider>
-  </SettingsProvider>
-);
+  );
+};
 
 export default IndexPage;

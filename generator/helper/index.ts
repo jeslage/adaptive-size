@@ -1,4 +1,4 @@
-import { SettingsFont } from "../contexts/SettingsProvider/definitions";
+import { Font } from "../state";
 
 export const getFontExtension = (filename: string) => {
   const match = filename.split(".");
@@ -29,9 +29,9 @@ export const decodeConfig = (obj) => {
   );
 };
 
-export const getFontStyle = (font?: SettingsFont) => {
+export const getFontStyle = (font?: Font) => {
   return font
-    ? `@font-face { font-family: '${font.id}'; src: url(data:application/x-font-woff;charset=utf-8;${font.base}) format('${font.extension}'); font-weight: normal; font-style: normal; }`
+    ? `@font-face { font-family: '${font.id}'; src: url(${font.base}) format('${font.extension}'); font-weight: normal; font-style: normal; }`
     : "";
 };
 

@@ -1,11 +1,13 @@
-import React, { useContext } from "react";
-
+import React from "react";
 import { XYPlot, XAxis, YAxis, LineSeries } from "react-vis";
-import { SettingsContext } from "../../../contexts";
+
+import { useItemsState, useBreakpointsState } from "../../../state";
+
 import { SidebarContent } from "../Sidebar";
 
 const GraphTab = () => {
-  const { items, breakpoints } = useContext(SettingsContext);
+  const { items } = useItemsState();
+  const { breakpoints } = useBreakpointsState();
 
   const axisStyle = { fill: "#c9c9c9" };
 
@@ -31,7 +33,7 @@ const GraphTab = () => {
             key={item.id}
             data={item.lineHeights.map((s, i) => ({
               x: breakpoints[i],
-              y: s,
+              y: s
             }))}
           />
         ))}

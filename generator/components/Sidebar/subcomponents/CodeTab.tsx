@@ -1,7 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import pascalcase from "pascalcase";
 
-import { SettingsContext } from "../../../contexts";
+import {
+  useFontsState,
+  useItemsState,
+  useBreakpointsState,
+  useStepsState
+} from "../../../state";
 
 import Code from "../../Code";
 import { SidebarContent } from "../Sidebar";
@@ -29,7 +34,10 @@ const getJS = (item, fonts) => {
 };
 
 const CodeTab = () => {
-  const { items, breakpoints, steps, fonts } = useContext(SettingsContext);
+  const { fonts } = useFontsState();
+  const { items } = useItemsState();
+  const { breakpoints } = useBreakpointsState();
+  const { steps } = useStepsState();
 
   const codeBlock = items.map((item) => getJS(item, fonts)).join("\n\n");
   const w = join(breakpoints);

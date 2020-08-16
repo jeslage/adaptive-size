@@ -1,12 +1,19 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useToasts } from "react-toast-notifications";
 import styled from "styled-components";
 
-import { SettingsContext } from "../../../contexts";
+import useImportExport from "../../../hooks/useImportExport";
+
+import {
+  useStepsState,
+  useProjectState,
+  useBreakpointsState,
+  useResetState,
+  useFontsState,
+  useItemsState
+} from "../../../state";
 
 import Input from "../../Input";
-import ExportConfig from "../../ExportConfig";
-import ImportConfig from "../../ImportConfig";
 import { SidebarInner, SidebarContent } from "../Sidebar";
 import IconButton from "../../IconButton";
 import FontList from "../../FontList";
@@ -14,6 +21,7 @@ import Range from "../../Range";
 import Counter from "../../Counter";
 import Fieldset from "../../Fieldset";
 import Button from "../../Button";
+import Upload from "../../Upload";
 
 const ProjectBar = styled.div`
   display: grid;
@@ -27,16 +35,27 @@ const ProjectBar = styled.div`
 
 const ProjectTab = () => {
   const { addToast } = useToasts();
+
+  const { resetSettings } = useResetState();
+
+  const { steps, updateSteps } = useStepsState();
+  const { project, updateProject } = useProjectState();
+  const { fonts } = useFontsState();
+  const { items } = useItemsState();
   const {
-    project,
-    updateProject,
-    resetSettings,
-    updateGlobals,
-    steps,
     breakpoints,
     addBreakpoint,
-    removeBreakpoint
-  } = useContext(SettingsContext);
+    removeBreakpoint,
+    updateBreakpoint
+  } = useBreakpointsState();
+
+  const { importConfig, exportConfig } = useImportExport({
+    fonts,
+    items,
+    project,
+    steps,
+    breakpoints
+  });
 
   const reset = () => {
     addToast("Settings resetted", {
@@ -50,8 +69,17 @@ const ProjectTab = () => {
     <SidebarContent
       bar={
         <ProjectBar>
-          <ImportConfig />
-          <ExportConfig />
+          <Upload
+            label="Import"
+            onChange={importConfig}
+            multiple={false}
+            accept="application/json"
+          />
+
+          <Button onClick={exportConfig} iconBefore="save">
+            Export
+          </Button>
+
           <IconButton
             onClick={reset}
             icon="remove"
@@ -78,7 +106,7 @@ const ProjectTab = () => {
             min={2}
             max={20}
             steps={1}
-            onChange={(val) => updateGlobals({ steps: val })}
+            onChange={(val) => updateSteps(val)}
           />
 
           {breakpoints.map((i, index) => (
@@ -95,18 +123,13 @@ const ProjectTab = () => {
                   ? () => removeBreakpoint(index)
                   : undefined
               }
-              onChange={(val) =>
-                updateGlobals({
-                  breakpoints: breakpoints.map((e, j) => {
-                    if (j !== index) return e;
-                    return val;
-                  })
-                })
-              }
+              onChange={(val) => updateBreakpoint(index, val)}
             />
           ))}
 
-          <Button onClick={addBreakpoint}>Add breakpoint</Button>
+          {breakpoints.length < 5 && (
+            <Button onClick={addBreakpoint}>Add breakpoint</Button>
+          )}
         </Fieldset>
 
         <FontList />
