@@ -89,7 +89,11 @@ const FontList = () => {
           ))}
         </div>
       )}
-      <Upload onChange={handleFileUpload} accept=".woff" label="Upload font" />
+      <Upload
+        onChange={handleFileUpload}
+        accept=".woff, .woff2"
+        label="Upload font"
+      />
     </StyledFontList>
   );
 };

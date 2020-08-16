@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import { useToasts } from "react-toast-notifications";
 import pascalcase from "pascalcase";
 
@@ -8,7 +7,7 @@ const useImportExport = (settings?: Settings) => {
   const { updateAllSettings } = useUpdateState();
   const { addToast } = useToasts();
 
-  const exportConfig = useCallback(async () => {
+  const exportConfig = async () => {
     if (!settings) return;
 
     const { project, breakpoints, steps, items, fonts } = settings;
@@ -47,7 +46,7 @@ const useImportExport = (settings?: Settings) => {
         autoDismiss: true
       });
     }
-  }, []);
+  };
 
   const importConfig = (e) => {
     const file = e.target.files[0];

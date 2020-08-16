@@ -18,7 +18,6 @@
     "@types/prismjs": "^1.16.0",
     "@types/react": "^16.9.22",
     "@types/react-dom": "^16.9.5",
-    "@types/react-vis": "^1.11.1",
     "@types/styled-components": "^5.0.1",
     "babel-plugin-styled-components": "^1.8.0",
     "typescript": "^3.8.3"
@@ -33,7 +32,6 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-toast-notifications": "^2.2.5",
-    "react-vis": "^1.11.7",
     "recoil": "^0.0.10",
     "styled-components": "^5.1.1",
     "webpack": "^4.41.2"

@@ -8,6 +8,12 @@ export const getFontExtension = (filename: string) => {
     : { name: match[0], extension: "woff" };
 };
 
+export const getFontStyle = (font?: Font) => {
+  return font
+    ? `@font-face { font-family: '${font.id}'; src: url(${font.base}) format('${font.extension}'); font-weight: normal; font-style: normal; }`
+    : "";
+};
+
 export const encodeConfig = (obj) => {
   return btoa(
     encodeURIComponent(JSON.stringify(obj)).replace(
@@ -27,20 +33,4 @@ export const decodeConfig = (obj) => {
         .join("")
     )
   );
-};
-
-export const getFontStyle = (font?: Font) => {
-  return font
-    ? `@font-face { font-family: '${font.id}'; src: url(${font.base}) format('${font.extension}'); font-weight: normal; font-style: normal; }`
-    : "";
-};
-
-export const convertArrayToObject = (array: any[], key: string) => {
-  const initialValue = {};
-  return array.reduce((obj, item) => {
-    return {
-      ...obj,
-      [item[key]]: item
-    };
-  }, initialValue);
 };

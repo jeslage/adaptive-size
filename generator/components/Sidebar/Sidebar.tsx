@@ -9,7 +9,6 @@ import StyledSidebar, { StyledSidebarContent } from "./Sidebar.style";
 
 import CodeTab from "./subcomponents/CodeTab";
 import SettingsTab from "./subcomponents/SettingsTab";
-import GraphTab from "./subcomponents/GraphTab";
 import ProjectTab from "./subcomponents/ProjectTab";
 import LoadingIndicator from "../LoadingIndicator";
 
@@ -51,8 +50,7 @@ const Sidebar: FC<SidebarProps> = ({ className }) => {
     { label: "Types", key: "textTypes", content: <SettingsTab /> },
     { label: "Project", key: "project", content: <ProjectTab /> },
     { label: "Presets", key: "presets", content: <PresetList /> },
-    { label: "Code", key: "code", content: <CodeTab /> },
-    { label: "Graphs", key: "graphs", content: <GraphTab /> }
+    { label: "Code", key: "code", content: <CodeTab /> }
   ];
 
   return (
