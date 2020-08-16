@@ -1,0 +1,46 @@
+{
+  "name": "adaptive-size",
+  "version": "1.0.0",
+  "description": "Small javascript helper for adaptive font sizes",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build:watch": "yarn clean && tsc -p . -w",
+    "build": "yarn clean && tsc -p .",
+    "clean": "rimraf dist",
+    "lint": "eslint ./src --ext ts",
+    "prepublish": "yarn prettier-write && yarn lint && yarn type-check",
+    "prepare": "yarn build",
+    "prettier-write": "prettier --write \"src/**/*.ts\"",
+    "type-check": "tsc --pretty --noEmit",
+    "start:generator": "yarn build:watch"
+  },
+  "author": "Johannes Eslage",
+  "license": "MIT",
+  "prettier": {
+    "printWidth": 90,
+    "singleQuote": true
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn run type-check"
+    }
+  },
+  "lint-staged": {
+    "*.@(ts|tsx)": [
+      "yarn lint",
+      "yarn prettier-write",
+      "git add"
+    ]
+  },
+  "repository": "jeslage/adaptive-size",
+  "bugs": "https://github.com/jeslage/adaptive-size/issues",
+  "keywords": [
+    "adaptive size",
+    "font size"
+  ]
+}

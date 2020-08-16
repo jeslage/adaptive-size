@@ -10,12 +10,12 @@ coverage:
 flags:
   adder:
     paths:
-      - src/adder/
+      - adder/
     assume: true
   subtractor:
     paths:
-      - src/subtractor/
+      - subtractor/
     assume: true
   tests:
     paths:
-      - src/__tests__
+      - __tests__

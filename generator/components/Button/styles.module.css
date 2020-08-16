@@ -1,0 +1,54 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  background: none;
+  text-transform: uppercase;
+  margin: 1em 0;
+  padding: 12px 20px;
+  text-align: center;
+  font-weight: bold;
+  font-size: var(--font-size-s);
+  cursor: pointer;
+  border-radius: 30px;
+  width: 100%;
+  border: 1px solid var(--color-color);
+  color: var(--color-color);
+  transition: background 0.2s ease-in-out;
+}
+
+.button:active,
+.button:focus {
+  color: var(--color-color);
+}
+
+.button:hover {
+  background: var(--color-active);
+}
+
+.button[disabled] {
+  opacity: 0.3;
+}
+
+.button svg {
+  height: 15px;
+  width: auto;
+  fill: var(--color-color);
+}
+
+.iconBefore {
+  margin-right: 10px;
+}
+
+.iconAfter {
+  margin-left: 10px;
+}
+
+/* ${(props) =>
+  props.variant === "secondary" &&
+  css`
+    border: none;
+    border-radius: 0;
+    margin: 0;
+  `} */

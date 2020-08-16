@@ -1,0 +1,9 @@
+.next
+node_modules
+generated
+.DS_Store
+out
+.env
+dist
+
+.vercel
