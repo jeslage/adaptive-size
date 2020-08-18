@@ -42,6 +42,7 @@ const StyledFontList = styled(Fieldset)`
       margin: 0;
       padding: 0;
       font-size: 25px;
+      word-break: break-all;
     }
   }
 `;

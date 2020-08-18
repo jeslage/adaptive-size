@@ -128,7 +128,9 @@ const ProjectTab = () => {
           ))}
 
           {breakpoints.length < 5 && (
-            <Button onClick={addBreakpoint}>Add breakpoint</Button>
+            <Button onClick={addBreakpoint} iconBefore="textWidth">
+              Add breakpoint
+            </Button>
           )}
         </Fieldset>
 

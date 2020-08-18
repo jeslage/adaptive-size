@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const StyledText = styled.div`
+  position: relative;
   padding: 40px 0;
   height: 100vh;
   max-height: 100vh;
@@ -24,6 +25,19 @@ const StyledText = styled.div`
     background: var(--colors-dark);
     color: var(--colors-lightest);
     font-size: var(--fontSizes-l);
+  }
+
+  .text__github {
+    position: absolute;
+    z-index: 1;
+    top: var(--spacings-s);
+    right: var(--spacings-s);
+    border-radius: 50%;
+
+    svg {
+      display: block;
+      width: 25px;
+    }
   }
 `;
 
