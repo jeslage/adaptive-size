@@ -20,10 +20,9 @@ import Fieldset from "../../Fieldset";
 
 const StyledSettingsBar = styled.div`
   display: flex;
+  margin-top: var(--spacings-xs);
 
   button {
-    margin: 10px 0;
-
     &:nth-of-type(1) {
       margin-right: 5px;
     }
@@ -121,7 +120,7 @@ const SettingsTab = () => {
                   suffix="px"
                   value={item.sizes[index]}
                   min={1}
-                  max={200}
+                  max={300}
                   steps={1}
                   onChange={(val) =>
                     updateItem(item.id, {

@@ -3,11 +3,11 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyle = createGlobalStyle`
   :root {
     --colors-white: #fff;
-    --colors-black: #080808;
-    --colors-darkest: #181818;
+    --colors-black: #070707;
+    --colors-darkest: #151515;
     --colors-dark: #202020;
-    --colors-light: #808080;
-    --colors-lightest: #c9c9c9;
+    --colors-light: #888;
+    --colors-lightest: #c8c8c8;
     --spacings-xxs: 4px;
     --spacings-xs: 8px;
     --spacings-s: 16px;
@@ -28,7 +28,13 @@ const GlobalStyle = createGlobalStyle`
   }
 
   small {
+    display: block;
     font-size: var(--fontSizes-s);
+    color: var(--colors-light);
+  }
+
+  a {
+    color: inherit;
   }
 
   html,

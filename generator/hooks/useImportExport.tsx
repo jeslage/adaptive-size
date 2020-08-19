@@ -89,7 +89,67 @@ const useImportExport = (settings?: Settings) => {
     }
   };
 
-  return { importConfig, exportConfig };
+  const exportSketchConfig = async () => {
+    if (!settings) return;
+
+    const { project, breakpoints, items } = settings;
+
+    const buildSketchTypes = () => {
+      const arr: any[] = [];
+
+      items.forEach((item) => {
+        breakpoints.forEach((breakpoint, index) => {
+          arr.push({
+            name: `${item.name} @ ${breakpoint}px`,
+            font: null,
+            size: item.sizes[index],
+            color: { red: 0, green: 0, blue: 0, alpha: 1 },
+            alignment: 0,
+            spacing: item.letterSpacing,
+            lineHeight: item.sizes[index] * item.lineHeights[index],
+            paragraphSpacing: 0,
+            textTransform: 0,
+            strikethrough: null,
+            underline: null
+          });
+        });
+      });
+
+      console.log(arr);
+
+      return { styles: arr };
+    };
+
+    try {
+      const json = await JSON.stringify(buildSketchTypes());
+
+      var blob = new Blob([json], { type: "application/json" });
+
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+
+      link.href = url;
+      link.setAttribute(
+        "download",
+        `${pascalcase(project.name)}_text-types_${Date.now()}.json`
+      );
+
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      addToast("Exported config successfully", {
+        appearance: "success",
+        autoDismiss: true
+      });
+    } catch (err) {
+      addToast("Something went wrong", {
+        appearance: "error",
+        autoDismiss: true
+      });
+    }
+  };
+  return { importConfig, exportConfig, exportSketchConfig };
 };
 
 export default useImportExport;

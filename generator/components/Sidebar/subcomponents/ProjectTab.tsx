@@ -1,5 +1,4 @@
 import React from "react";
-import { useToasts } from "react-toast-notifications";
 import styled from "styled-components";
 
 import useImportExport from "../../../hooks/useImportExport";
@@ -8,14 +7,12 @@ import {
   useStepsState,
   useProjectState,
   useBreakpointsState,
-  useResetState,
   useFontsState,
   useItemsState
 } from "../../../state";
 
 import Input from "../../Input";
 import { SidebarInner, SidebarContent } from "../Sidebar";
-import IconButton from "../../IconButton";
 import FontList from "../../FontList";
 import Range from "../../Range";
 import Counter from "../../Counter";
@@ -25,19 +22,12 @@ import Upload from "../../Upload";
 
 const ProjectBar = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, auto);
+  grid-template-columns: repeat(2, 1fr);
   grid-gap: 1em;
-
-  button {
-    margin: 1em 0;
-  }
+  padding-top: var(--spacings-xs);
 `;
 
 const ProjectTab = () => {
-  const { addToast } = useToasts();
-
-  const { resetSettings } = useResetState();
-
   const { steps, updateSteps } = useStepsState();
   const { project, updateProject } = useProjectState();
   const { fonts } = useFontsState();
@@ -49,7 +39,7 @@ const ProjectTab = () => {
     updateBreakpoint
   } = useBreakpointsState();
 
-  const { importConfig, exportConfig } = useImportExport({
+  const { importConfig, exportConfig, exportSketchConfig } = useImportExport({
     fonts,
     items,
     project,
@@ -57,19 +47,12 @@ const ProjectTab = () => {
     breakpoints
   });
 
-  const reset = () => {
-    addToast("Settings resetted", {
-      appearance: "success",
-      autoDismiss: true
-    });
-    resetSettings();
-  };
-
   return (
     <SidebarContent
       bar={
         <ProjectBar>
           <Upload
+            variant="outlined"
             label="Import"
             onChange={importConfig}
             multiple={false}
@@ -79,14 +62,6 @@ const ProjectTab = () => {
           <Button onClick={exportConfig} iconBefore="save">
             Export
           </Button>
-
-          <IconButton
-            onClick={reset}
-            icon="remove"
-            label="Reset settings"
-            variant="outlined"
-            size="large"
-          />
         </ProjectBar>
       }
     >
@@ -128,13 +103,38 @@ const ProjectTab = () => {
           ))}
 
           {breakpoints.length < 5 && (
-            <Button onClick={addBreakpoint} iconBefore="textWidth">
+            <Button
+              onClick={addBreakpoint}
+              iconBefore="textWidth"
+              variant="secondary"
+            >
               Add breakpoint
             </Button>
           )}
         </Fieldset>
 
         <FontList />
+
+        <Fieldset label="Sketch">
+          <Button
+            onClick={exportSketchConfig}
+            iconBefore="save"
+            variant="secondary"
+          >
+            Export Sketch Config
+          </Button>
+
+          <small style={{ textAlign: "center" }}>
+            Can be imported to Sketch via{" "}
+            <a
+              href="https://github.com/nilshoenson/shared-text-styles"
+              target="_blank"
+            >
+              Shared Text Styles
+            </a>{" "}
+            Plugin
+          </small>
+        </Fieldset>
       </SidebarInner>
     </SidebarContent>
   );

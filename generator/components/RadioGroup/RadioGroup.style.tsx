@@ -10,7 +10,7 @@ const StyledRadioGroup = styled.div`
     align-items: center;
     padding: 5px;
     margin: 0 0 0 10px;
-    border-radius: 5px;
+    border-radius: var(--spacings-xs);
     opacity: 0.5;
 
     svg {

@@ -10,15 +10,15 @@ const StyledButton = styled.button<StyledButtonProps>`
   outline: none;
   background: none;
   text-transform: uppercase;
-  margin: 1em 0;
+  margin: 0 0 var(--spacings-xs);
   padding: 12px 20px;
   text-align: center;
   font-weight: bold;
   font-size: var(--fontSizes-s);
   cursor: pointer;
-  border-radius: 30px;
+  border-radius: var(--spacings-xs);
   width: 100%;
-  border: 1px solid var(--colors-lightest);
+  border: 1px solid var(--colors-light);
   color: var(--colors-lightest);
   transition: background 0.2s ease-in-out;
 
@@ -53,8 +53,7 @@ const StyledButton = styled.button<StyledButtonProps>`
     props.variant === "secondary" &&
     css`
       border: none;
-      border-radius: 0;
-      margin: 0;
+      background: var(--colors-darkest);
     `}
 `;
 

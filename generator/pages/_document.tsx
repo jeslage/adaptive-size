@@ -1,4 +1,10 @@
-import Document, { DocumentContext } from "next/document";
+import Document, {
+  DocumentContext,
+  Head,
+  Html,
+  Main,
+  NextScript
+} from "next/document";
 import { ServerStyleSheet } from "styled-components";
 
 export default class MyDocument extends Document {
@@ -26,5 +32,23 @@ export default class MyDocument extends Document {
     } finally {
       sheet.seal();
     }
+  }
+
+  render() {
+    return (
+      <Html lang="en">
+        <Head>
+          <title>Adaptive Size Generator</title>
+          <meta
+            name="Description"
+            content="Adaptive Size is a small javascript helper to get an adaptive font-size css string."
+          />
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
   }
 }

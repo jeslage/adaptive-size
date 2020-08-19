@@ -22,7 +22,7 @@ const StyledTextType = styled.div<{ hasPadding: boolean }>`
 
   span {
     font-size: 10px;
-    opacity: 0.5;
+    color: var(--colors-dark);
     display: block;
     white-space: nowrap;
 
@@ -55,14 +55,8 @@ const padding = (props: TypeProps) => {
 const border = (props: TypeProps) => {
   return props.as === "textarea"
     ? css`
-        border-top: 1px solid transparent;
-        border-bottom: 1px solid transparent;
-
-        &:hover,
-        &:focus {
-          border-top: 1px solid #ccc;
-          border-bottom: 1px solid #ccc;
-        }
+        border-top: 1px solid var(--colors-lightest);
+        border-bottom: 1px solid var(--colors-lightest);
       `
     : undefined;
 };
@@ -169,7 +163,10 @@ const TextType = (props: TextTypeProps) => {
       )}
 
       <span>
-        <b>{name}</b> | ~{current.size}px | ~{current.lineHeight} |
+        <b>{name}</b> |{" "}
+        {Boolean(onChange)
+          ? `~${current.size}px | ~${current.lineHeight} | `
+          : ""}
         {sizes.join(" – ")} | {lineHeights.join(" – ")}
         {letterSpacing && letterSpacing > 0 ? <>| {letterSpacing}</> : null}
       </span>

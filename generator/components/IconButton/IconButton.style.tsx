@@ -13,7 +13,7 @@ const StyledIconButton = styled.button<StyledIconButtonProps>`
   text-align: center;
   flex-shrink: 0;
   cursor: pointer;
-  border-radius: 30px;
+  border-radius: var(--spacings-xs);
   border: 1px solid var(--colors-darkest);
   color: var(--colors-lightest);
   background: var(--colors-darkest);
@@ -67,11 +67,11 @@ const StyledIconButton = styled.button<StyledIconButtonProps>`
   ${(props) =>
     props.variant === "outlined" &&
     css`
-      border-color: var(--colors-lightest);
+      border-color: var(--colors-light);
       background: none;
 
       &:hover {
-        border-color: var(--colors-lightest);
+        border-color: var(--colors-light);
       }
     `}
 `;

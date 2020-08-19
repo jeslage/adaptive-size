@@ -66,6 +66,8 @@ const Text: FC<TextProps> = ({ className }) => {
         href="https://github.com/jeslage/adaptive-size"
         target="_blank"
         className="text__github"
+        aria-label="Adaptive Size GitHub Repository"
+        rel="noopener noreferrer"
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32.58 31.77">
           <path

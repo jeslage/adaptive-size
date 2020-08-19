@@ -11,7 +11,7 @@ const StyledPreset = styled.div`
   .preset__card {
     display: block;
     width: 100%;
-    border-radius: 5px;
+    border-radius: var(--spacings-xs);
   }
 
   .preset__button {

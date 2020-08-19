@@ -27,7 +27,7 @@ const Counter: FC<CounterProps> = ({
   steps = 1,
   onChange,
   suffix,
-  iconBefore,
+  iconBefore
 }) => {
   const updateValue = (val: number) => {
     if (onChange) onChange(Math.round(val * 100) / 100);
@@ -68,7 +68,6 @@ const Counter: FC<CounterProps> = ({
           disabled={value === min}
           label="Decrease"
           icon="minus"
-          variant="outlined"
         />
 
         <span className="counter__input">
@@ -87,7 +86,6 @@ const Counter: FC<CounterProps> = ({
           disabled={value === max}
           label="Increase"
           icon="plus"
-          variant="outlined"
         />
       </div>
     </StyledCounter>

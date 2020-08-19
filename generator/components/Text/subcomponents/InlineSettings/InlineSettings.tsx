@@ -88,7 +88,7 @@ const InlineSettings: FC<InlineSettingsProps> = ({ item, children }) => {
                   suffix="px"
                   value={item.sizes[index]}
                   min={1}
-                  max={200}
+                  max={300}
                   steps={1}
                   onChange={(val) =>
                     updateItem(item.id, {

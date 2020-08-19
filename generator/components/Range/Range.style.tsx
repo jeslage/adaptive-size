@@ -49,6 +49,7 @@ const StyledRange = styled.div`
     margin: 0;
     background: none;
     width: 120px;
+    transition: all 0.2s ease-in-out;
   }
 
   input[type="range"]:focus {
@@ -57,56 +58,71 @@ const StyledRange = styled.div`
 
   input[type="range"]::-webkit-slider-runnable-track {
     width: 100%;
-    height: 4px;
+    height: 8px;
     cursor: pointer;
-    background: var(--colors-light);
-    border-radius: 2px;
+    background: var(--colors-darkest);
+    border-radius: var(--spacings-xs);
+    transition: all 0.2s ease-in-out;
   }
 
   input[type="range"]::-moz-range-track {
     width: 100%;
-    height: 4px;
+    height: 8px;
     cursor: pointer;
-    background: var(--colors-light);
-    border-radius: 2px;
+    background: var(--colors-darkest);
+    border-radius: var(--spacings-xs);
+    transition: all 0.2s ease-in-out;
   }
 
   input[type="range"]::-ms-track {
     width: 100%;
-    height: 4px;
+    height: 8px;
     cursor: pointer;
-    background: var(--colors-light);
-    border-radius: 2px;
+    background: var(--colors-darkest);
+    border-radius: var(--spacings-xs);
+    transition: all 0.2s ease-in-out;
+  }
+
+  input[type="range"]::-webkit-slider-runnable-track:hover {
+    background: var(--colors-black);
+  }
+
+  input[type="range"]::-moz-range-track:hover {
+    background: var(--colors-black);
+  }
+
+  input[type="range"]::-ms-track:hover {
+    background: var(--colors-black);
   }
 
   input[type="range"]::-ms-thumb {
     height: 20px;
     width: 20px;
-    border-radius: 10px;
-    background: var(--colors-lightest);
+    border-radius: var(--spacings-xs);
+    background: var(--colors-light);
     cursor: pointer;
     appearance: none;
-    margin-top: -8px;
+    margin-top: -6px;
   }
 
   input[type="range"]::-moz-range-thumb {
     height: 20px;
     width: 20px;
-    border-radius: 10px;
-    background: var(--colors-lightest);
+    border-radius: var(--spacings-xs);
+    background: var(--colors-light);
     cursor: pointer;
     appearance: none;
-    margin-top: -8px;
+    margin-top: -6px;
   }
 
   input[type="range"]::-webkit-slider-thumb {
     height: 20px;
     width: 20px;
-    border-radius: 10px;
-    background: var(--colors-lightest);
+    border-radius: var(--spacings-xs);
+    background: var(--colors-light);
     cursor: pointer;
     appearance: none;
-    margin-top: -8px;
+    margin-top: -6px;
   }
 `;
 

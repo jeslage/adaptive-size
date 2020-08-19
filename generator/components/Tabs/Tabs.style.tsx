@@ -33,7 +33,7 @@ const StyledTabs = styled.div`
       height: 25px;
       align-items: center;
       justify-content: center;
-      border-radius: var(--spacings-s);
+      border-radius: var(--spacings-xs);
       background: var(--colors-black);
       font-weight: bold;
       font-size: 9px;

@@ -70,7 +70,7 @@ const StyledLabel = styled.span<StyledLabelProps>`
       .label:after {
         background: var(--colors-black);
         color: var(--colors-lightest);
-        border-radius: 5px;
+        border-radius: var(--spacings-xs);
         content: attr(aria-label);
         font-size: var(--fontSizes-m);
         line-height: 1.5;

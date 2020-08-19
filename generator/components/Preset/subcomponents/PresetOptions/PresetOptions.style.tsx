@@ -25,7 +25,7 @@ const StyledPresetOptions = styled.div`
     background: var(--colors-darkest);
     color: var(--colors-lightest);
     z-index: 999;
-    border-radius: 5px;
+    border-radius: var(--spacings-xs);
     border: 1px solid var(--colors-dark);
     overflow: hidden;
 

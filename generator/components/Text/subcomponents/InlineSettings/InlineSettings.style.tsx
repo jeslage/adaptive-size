@@ -20,7 +20,7 @@ const StyledInlineSettings = styled.div<Props>`
   }
 
   .inlineSettings__content {
-    background: var(--colors-darkest);
+    background: var(--colors-dark);
     border-radius: 0 1em 1em 1em;
     padding: 1em 1em 0;
     max-height: 600px;
@@ -37,7 +37,7 @@ const StyledInlineSettings = styled.div<Props>`
     border-radius: 50%;
     margin: 0;
     padding: 0.5em;
-    background: var(--colors-darkest);
+    background: var(--colors-dark);
 
     ${(props) =>
       props.isOpen &&

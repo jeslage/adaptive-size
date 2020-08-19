@@ -20,7 +20,7 @@ const StyledTextarea = styled.label`
     resize: none;
     background: none;
     padding: 5px;
-    border-radius: 5px;
+    border-radius: var(--spacings-xs);
     border: 1px solid var(--colors-lightest);
     color: var(--colors-lightest);
     margin-top: 1em;
