@@ -33,6 +33,7 @@ const StyledCode = styled.div<StyledCodeProps>`
   }
 
   pre {
+    margin: 0;
     transition: opacity 0.2s ease-in-out;
     opacity: ${(props) => (props.init ? "1" : 0)};
   }
@@ -57,8 +58,7 @@ const StyledCode = styled.div<StyledCodeProps>`
 
   /* Code blocks */
   pre[class*="language-"] {
-    padding: 10px 13px;
-    margin: 0.5em 0;
+    padding: var(--spacings-s);
     overflow: auto;
   }
 

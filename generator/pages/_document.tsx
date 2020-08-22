@@ -37,13 +37,7 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
-        <Head>
-          <title>Adaptive Size Generator</title>
-          <meta
-            name="Description"
-            content="Adaptive Size is a small javascript helper to get an adaptive font-size css string."
-          />
-        </Head>
+        <Head />
         <body>
           <Main />
           <NextScript />

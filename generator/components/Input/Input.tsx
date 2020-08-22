@@ -20,15 +20,18 @@ const Input: FC<InputProps> = ({
   iconBefore,
   type = "text",
   value,
-  onChange,
+  onChange
 }) => {
   return (
     <StyledInput>
       {(label || iconBefore) && (
-        <Label icon={iconBefore} label={label} description={description} />
+        <label htmlFor={label?.replace(" ", "")}>
+          <Label icon={iconBefore} label={label} description={description} />
+        </label>
       )}
 
       <input
+        id={label ? label?.replace(" ", "") : undefined}
         type={type}
         value={value}
         onChange={(event) => onChange(event.target.value)}

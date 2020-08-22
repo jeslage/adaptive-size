@@ -1,4 +1,5 @@
 import React from "react";
+import Head from "next/head";
 import styled from "styled-components";
 import { ToastProvider } from "react-toast-notifications";
 
@@ -39,6 +40,14 @@ const IndexPage = () => {
       components={{ Toast: Toast }}
     >
       <PresetsProvider>
+        <Head>
+          <title>Adaptive Size Generator</title>
+          <meta
+            name="Description"
+            content="Adaptive Size is a small javascript helper to get an adaptive font-size css string."
+          />
+        </Head>
+
         <StyledHome>
           <Sidebar className="home__sidebar" />
           <Text className="home__text" />

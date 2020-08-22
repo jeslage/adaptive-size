@@ -1,12 +1,10 @@
 import React, { ReactNode } from "react";
 import styled from "styled-components";
-import { IconTypes } from "../Icon";
 
 export interface TabProps {
   index?: number;
   selected?: boolean;
   title: string;
-  icon: IconTypes;
   children?: ReactNode;
 }
 

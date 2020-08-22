@@ -26,7 +26,7 @@ const Headline = styled.h1`
     // Line heights
     lineHeight?: [1.5, 1.6, 1.5],
     // Number of breakpoints between steps
-    breakpoints?: 4,
+    breakpoints?: 8,
   })}
 `;
 ```

@@ -23,7 +23,7 @@ import Upload from "../../Upload";
 const ProjectBar = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 1em;
+  grid-gap: var(--spacings-s);
   padding-top: var(--spacings-xs);
 `;
 

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledPreset = styled.div`
-  margin: 20px 0;
+  margin-bottom: var(--spacings-s);
   flex-wrap: wrap;
   display: flex;
   border-radius: 3px;

@@ -14,7 +14,7 @@ export const StyledSidebarContent = styled.div`
     flex-shrink: 0;
     background: var(--colors-darkest);
     border-top: 1px solid var(--colors-black);
-    padding: 0 1em;
+    padding: 0 var(--spacings-s);
   }
 `;
 

@@ -20,7 +20,7 @@ const StyledText = styled.div`
     z-index: 1;
     bottom: var(--spacings-s);
     right: var(--spacings-s);
-    border-radius: var(--spacings-s);
+    border-radius: var(--spacings-xs);
     padding: var(--spacings-xs) var(--spacings-s);
     background: var(--colors-dark);
     color: var(--colors-lightest);

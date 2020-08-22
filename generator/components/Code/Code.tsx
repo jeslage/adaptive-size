@@ -6,7 +6,7 @@ import Prism from "prismjs";
 import Icon from "../Icon";
 import StyledCode from "./Code.style";
 
-const loadLanguage = async (language: "javascript" | "css") => {
+const loadLanguage = async (language: "javascript" | "css" | "scss") => {
   if (language === "javascript") {
     await import(
       /* webpackChunkName: "code-js" */ "prismjs/components/prism-javascript"
@@ -15,11 +15,15 @@ const loadLanguage = async (language: "javascript" | "css") => {
     await import(
       /* webpackChunkName: "code-css" */ "prismjs/components/prism-css"
     );
+  } else if (language === "scss") {
+    await import(
+      /* webpackChunkName: "code-scss" */ "prismjs/components/prism-scss"
+    );
   }
 };
 
 export interface CodeProps {
-  language?: "javascript" | "css";
+  language?: "javascript" | "css" | "scss";
   code: string;
 }
 
@@ -42,7 +46,7 @@ const Code: FC<CodeProps> = ({ language = "css", code }) => {
   const copyCode = () => {
     addToast("Copied Successfully", {
       appearance: "success",
-      autoDismiss: true,
+      autoDismiss: true
     });
 
     if (codeBox.current) {

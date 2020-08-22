@@ -9,7 +9,7 @@ import Fieldset from "../Fieldset";
 import { useFontsState } from "../../state";
 
 const StyledFontList = styled(Fieldset)`
-  margin: var(--spacings-m) 0;
+  margin: var(--spacings-s) 0 var(--spacings-xs);
   width: 100%;
 
   .fontList__remove {
@@ -30,7 +30,7 @@ const StyledFontList = styled(Fieldset)`
     background: var(--colors-white);
     color: var(--colors-black);
     border-radius: var(--spacings-xs);
-    margin: var(--spacings-s) 0;
+    margin: 0 0 var(--spacings-xs);
     padding: var(--spacings-s);
     width: 100%;
 

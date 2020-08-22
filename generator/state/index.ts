@@ -88,17 +88,36 @@ export const itemsState = atom<Item[]>({
 });
 
 export const useBreakpointsState = () => {
+  // @ts-ignore
+  const [items, setItems] = useRecoilState(itemsState);
   const [breakpoints, setBreakpoints] = useRecoilState(breakpointsState);
 
   const addBreakpoint = () => {
+    const length = breakpoints.length;
+
     setBreakpoints((prev) => {
-      const length = prev.length;
       return [...prev, prev[length - 1] + 500];
+    });
+
+    setItems((prev) => {
+      return prev.map((item) => ({
+        ...item,
+        sizes: [...item.sizes, item.sizes[length - 1]],
+        lineHeights: [...item.lineHeights, item.lineHeights[length - 1]]
+      }));
     });
   };
 
   const removeBreakpoint = (id: number) => {
     setBreakpoints((prev) => prev.filter((_, index) => index !== id));
+
+    setItems((prev) =>
+      prev.map((item) => ({
+        ...item,
+        sizes: item.sizes.filter((_, index) => index !== id),
+        lineHeights: item.lineHeights.filter((_, index) => index !== id)
+      }))
+    );
   };
 
   const updateBreakpoint = (id: number, value: number) => {
@@ -110,7 +129,7 @@ export const useBreakpointsState = () => {
 
 export const useItemsState = () => {
   const [items, setItems] = useRecoilState(itemsState);
-  const [fonts] = useRecoilState(itemsState);
+  const [fonts] = useRecoilState(fontsState);
 
   const addItem = () => {
     const id = nanoid();

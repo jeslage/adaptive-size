@@ -21,8 +21,8 @@ const StyledInlineSettings = styled.div<Props>`
 
   .inlineSettings__content {
     background: var(--colors-dark);
-    border-radius: 0 1em 1em 1em;
-    padding: 1em 1em 0;
+    border-radius: 0 var(--spacings-xs) var(--spacings-xs) var(--spacings-xs);
+    padding: var(--spacings-s) var(--spacings-s) 0;
     max-height: 600px;
     overflow-y: scroll;
   }
@@ -32,9 +32,9 @@ const StyledInlineSettings = styled.div<Props>`
     outline: none;
     background: none;
     border: none;
-    width: calc(1em + 15px);
-    height: calc(1em + 15px);
-    border-radius: 50%;
+    width: calc(var(--spacings-s) + 15px);
+    height: calc(var(--spacings-s) + 15px);
+    border-radius: var(--spacings-xs);
     margin: 0;
     padding: 0.5em;
     background: var(--colors-dark);
@@ -42,7 +42,7 @@ const StyledInlineSettings = styled.div<Props>`
     ${(props) =>
       props.isOpen &&
       css`
-        border-radius: 50% 50% 0 0;
+        border-radius: var(--spacings-xs) var(--spacings-xs) 0 0;
       `}
 
     svg {

@@ -115,8 +115,6 @@ const useImportExport = (settings?: Settings) => {
         });
       });
 
-      console.log(arr);
-
       return { styles: arr };
     };
 

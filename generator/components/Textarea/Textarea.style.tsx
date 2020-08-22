@@ -23,7 +23,7 @@ const StyledTextarea = styled.label`
     border-radius: var(--spacings-xs);
     border: 1px solid var(--colors-lightest);
     color: var(--colors-lightest);
-    margin-top: 1em;
+    margin-top: var(--spacings-s);
     font-size: var(--fontSizes-l);
     font-family: inherit;
   }

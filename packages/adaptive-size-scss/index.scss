@@ -1,0 +1,86 @@
+$as-globals: (
+  breakpoints: 768 1024,
+  steps: 8
+);
+
+$as-config: (
+  sizes: 12 24,
+  lineHeights: 1 1.4
+);
+
+@function interpolate(
+  $width: number,
+  $from: number,
+  $to: number,
+  $min: number,
+  $max: number
+) {
+  @return $min + ($max - $min) * (($width - $from) / ($to - $from));
+}
+
+@function decimalRound($number) {
+  @return round($number * 10000) / 10000;
+}
+
+@function px2rem($px: number) {
+  @return decimalRound($px / 16 * 1rem);
+}
+
+@function if($condition, $if-value, $else-value) {
+  @if ($condition == true) {
+    @return $if-value;
+  } @else {
+    @return $else-value;
+  }
+}
+
+@mixin adaptive-size($config: $as-config, $globals: $as-globals) {
+  // Global keys
+  $breakpoints: map-get($globals, "breakpoints");
+  $steps: map-get($globals, "steps");
+
+  // Text type keys
+  $sizes: map-get($config, "sizes");
+  $lineHeights: map-get($config, "lineHeights");
+
+  @for $i from 1 through length($sizes) {
+    $breakpoint: nth($breakpoints, $i);
+    $size: nth($sizes, $i);
+    $lineHeight: nth($lineHeights, $i);
+
+    @if $i == 1 {
+      font-size: $size;
+      line-height: $lineHeight;
+    } @else {
+      $next: nth($breakpoints, $i);
+      $current: nth($breakpoints, $i - 1);
+
+      $partialStep: ($next - $current) / $steps;
+
+      @for $j from 0 through $steps {
+        $width: $current + ($partialStep * $j);
+
+        $fontSize: interpolate(
+          $width,
+          $current,
+          $next,
+          nth($sizes, $i - 1),
+          $size
+        );
+
+        $line: interpolate(
+          $width,
+          $current,
+          $next,
+          nth($lineHeights, $i - 1),
+          $lineHeight
+        );
+
+        @media (min-width: px2rem($width)) {
+          font-size: px2rem($fontSize);
+          line-height: px2rem($line * $fontSize, 4);
+        }
+      }
+    }
+  }
+}

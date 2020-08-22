@@ -74,7 +74,7 @@ const StyledLabel = styled.span<StyledLabelProps>`
         content: attr(aria-label);
         font-size: var(--fontSizes-m);
         line-height: 1.5;
-        padding: 0.75em 1em;
+        padding: var(--spacings-xs) var(--spacings-s);
         white-space: nowrap;
         box-sizing: content-box;
         bottom: 100%;

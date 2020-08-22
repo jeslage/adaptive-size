@@ -58,7 +58,7 @@ const Sidebar: FC<SidebarProps> = ({ className }) => {
       <div className="sidebar__wrapper">
         <Tabs>
           {items.map((item) => (
-            <Tab key={item.key} title={item.label} icon="css">
+            <Tab key={item.key} title={item.label}>
               {item.content}
             </Tab>
           ))}
