@@ -1,8 +1,7 @@
-import styled, { css } from "styled-components";
-import React, { useEffect, useRef, useState } from "react";
-import throttle from "lodash.throttle";
-
-import adaptiveSize from "../../styles/adapativeSize";
+import styled, { css } from 'styled-components';
+import React, { useEffect, useRef, useState } from 'react';
+import throttle from 'lodash.throttle';
+import adaptiveSize, { adaptiveSizeCssVariables } from 'adaptive-size';
 
 type TextTypeProps = {
   name: string;
@@ -39,13 +38,13 @@ const StyledTextType = styled.div<{ hasPadding: boolean }>`
   }
 `;
 
-type TypeProps = { as: "textarea" | "p" } & Omit<
+type TypeProps = { as: 'textarea' | 'p' } & Omit<
   TextTypeProps,
-  "name" | "font" | "text"
+  'name' | 'font' | 'text'
 >;
 
 const padding = (props: TypeProps) => {
-  return props.as === "textarea"
+  return props.as === 'textarea'
     ? css`
         padding: 0 var(--spacings-m);
       `
@@ -53,7 +52,7 @@ const padding = (props: TypeProps) => {
 };
 
 const border = (props: TypeProps) => {
-  return props.as === "textarea"
+  return props.as === 'textarea'
     ? css`
         border-top: 1px solid var(--colors-lightest);
         border-bottom: 1px solid var(--colors-lightest);
@@ -78,7 +77,7 @@ const Type = styled.textarea<TypeProps>`
       breakpoints: props.breakpoints,
       lineHeights: props.lineHeights,
       steps: props.steps,
-      sizes: props.sizes
+      sizes: props.sizes,
     })}
 `;
 
@@ -93,26 +92,26 @@ const TextType = (props: TextTypeProps) => {
     letterSpacing = 0,
     font,
     onChange,
-    onBlur
+    onBlur,
   } = props;
   const typeRef = useRef<HTMLTextAreaElement>(null);
-  const [current, setCurrent] = useState({ size: "0", lineHeight: "0" });
+  const [current, setCurrent] = useState({ size: '0', lineHeight: '0' });
 
   const handleResize = throttle(() => {
     if (typeRef.current) {
       const px = window
         .getComputedStyle(typeRef.current, null)
-        .getPropertyValue("font-size");
+        .getPropertyValue('font-size');
       const lh = window
         .getComputedStyle(typeRef.current, null)
-        .getPropertyValue("line-height");
+        .getPropertyValue('line-height');
 
-      const pxInt = Math.round(parseFloat(px.split("px")[0]) * 10) / 10;
-      const lhInt = Math.round(parseFloat(lh.split("px")[0]) * 10) / 10;
+      const pxInt = Math.round(parseFloat(px.split('px')[0]) * 10) / 10;
+      const lhInt = Math.round(parseFloat(lh.split('px')[0]) * 10) / 10;
 
       setCurrent({
         size: pxInt.toString(),
-        lineHeight: (lhInt / pxInt).toFixed(2)
+        lineHeight: (lhInt / pxInt).toFixed(2),
       });
     }
   }, [400]);
@@ -120,8 +119,8 @@ const TextType = (props: TextTypeProps) => {
   useEffect(() => {
     handleResize();
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   useEffect(() => {
@@ -129,8 +128,8 @@ const TextType = (props: TextTypeProps) => {
   }, [breakpoints, steps, sizes]);
 
   const style = {
-    fontFamily: font ? `'${font}', sans-serif` : "sans-serif",
-    letterSpacing: `${letterSpacing}px`
+    fontFamily: font ? `'${font}', sans-serif` : 'sans-serif',
+    letterSpacing: `${letterSpacing}px`,
   };
 
   return (
@@ -163,11 +162,11 @@ const TextType = (props: TextTypeProps) => {
       )}
 
       <span>
-        <b>{name}</b> |{" "}
+        <b>{name}</b> |{' '}
         {Boolean(onChange)
           ? `~${current.size}px | ~${current.lineHeight} | `
-          : ""}
-        {sizes.join(" – ")} | {lineHeights.join(" – ")}
+          : ''}
+        {sizes.join(' – ')} | {lineHeights.join(' – ')}
         {letterSpacing && letterSpacing > 0 ? <>| {letterSpacing}</> : null}
       </span>
     </StyledTextType>

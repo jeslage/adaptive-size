@@ -1,11 +1,16 @@
 $as-globals: (
   breakpoints: 768 1024,
-  steps: 8
+  steps: 8,
 );
 
 $as-config: (
   sizes: 12 24,
-  lineHeights: 1 1.4
+  lineHeights: 1 1.4,
+);
+
+$as-properties: (
+  size: 'font-size',
+  lineHeight: 'line-height',
 );
 
 @function interpolate(
@@ -26,22 +31,21 @@ $as-config: (
   @return decimalRound($px / 16 * 1rem);
 }
 
-@function if($condition, $if-value, $else-value) {
-  @if ($condition == true) {
-    @return $if-value;
-  } @else {
-    @return $else-value;
-  }
-}
-
-@mixin adaptive-size($config: $as-config, $globals: $as-globals) {
+@mixin adaptive-size(
+  $config: $as-config,
+  $globals: $as-globals,
+  $properties: $as-properties
+) {
   // Global keys
-  $breakpoints: map-get($globals, "breakpoints");
-  $steps: map-get($globals, "steps");
+  $breakpoints: map-get($globals, 'breakpoints');
+  $steps: map-get($globals, 'steps');
 
   // Text type keys
-  $sizes: map-get($config, "sizes");
-  $lineHeights: map-get($config, "lineHeights");
+  $sizes: map-get($config, 'sizes');
+  $lineHeights: map-get($config, 'lineHeights');
+
+  $sizeProp: map-get($properties, 'size');
+  $lineHeightProp: map-get($properties, 'lineHeight');
 
   @for $i from 1 through length($sizes) {
     $breakpoint: nth($breakpoints, $i);
@@ -49,13 +53,13 @@ $as-config: (
     $lineHeight: nth($lineHeights, $i);
 
     @if $i == 1 {
-      font-size: $size;
-      line-height: $lineHeight;
+      #{$sizeProp}: px2rem($size);
+      #{$lineHeightProp}: px2rem($lineHeight * $size);
     } @else {
       $next: nth($breakpoints, $i);
       $current: nth($breakpoints, $i - 1);
 
-      $partialStep: ($next - $current) / $steps;
+      $partialStep: ($next - $current) / ($steps * (length($sizes) - 1));
 
       @for $j from 0 through $steps {
         $width: $current + ($partialStep * $j);
@@ -77,10 +81,25 @@ $as-config: (
         );
 
         @media (min-width: px2rem($width)) {
-          font-size: px2rem($fontSize);
-          line-height: px2rem($line * $fontSize, 4);
+          #{$sizeProp}: px2rem($fontSize);
+          #{$lineHeightProp}: px2rem($line * $fontSize);
         }
       }
     }
   }
+}
+
+@mixin adaptive-size-css-variables(
+  $key,
+  $config: $as-config,
+  $globals: $as-globals
+) {
+  @include adaptive-size(
+    $config,
+    $globals,
+    (
+      size: --#{$key}-font-size,
+      lineHeight: --#{$key}-line-height,
+    )
+  );
 }

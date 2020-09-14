@@ -10,7 +10,7 @@ type BreakpointItem = {
   lineHeight?: number;
 };
 
-type AdaptiveSizeKeys = "fontSize" | "lineHeight" | string;
+type AdaptiveSizeKeys = 'fontSize' | 'lineHeight' | string;
 
 export type AdaptiveSizeStyles = {
   [key in AdaptiveSizeKeys]: string | number | BreakpointItem;
@@ -78,7 +78,7 @@ export const adaptiveSize = (
                 lineHeights[i - 1],
                 lineHeights[i]
               ).toFixed(2)
-            )
+            ),
           }
         : undefined;
 
@@ -87,7 +87,7 @@ export const adaptiveSize = (
 
       mediaQueries[`@media (min-width: ${mq})`] = {
         fontSize: `${fontSize}`,
-        ...lh
+        ...lh,
       };
     }
   }
@@ -95,7 +95,7 @@ export const adaptiveSize = (
   return {
     fontSize: px2rem(sizes[0]),
     ...(lineHeights ? { lineHeight: lineHeights[0] } : undefined),
-    ...mediaQueries
+    ...mediaQueries,
   };
 };
 
