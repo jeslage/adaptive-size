@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import IconButton from "../../../IconButton";
 import StyledPresetOptions from "./PresetOptions.style";
 import { IconTypes } from "../../../Icon";

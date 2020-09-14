@@ -23,7 +23,6 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
-    "adaptive-size": "1.0.0",
     "babel-loader": "^8.0.6",
     "clipboard-polyfill": "^3.0.0-pre5",
     "lodash.throttle": "^4.1.1",

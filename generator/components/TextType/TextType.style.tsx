@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import adaptiveSize from "adaptive-size";
+import adaptiveSize from "../../styles/adapativeSize";
 
 import { TextTypeProps } from "./TextType";
 
