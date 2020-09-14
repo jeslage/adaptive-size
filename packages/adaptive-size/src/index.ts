@@ -3,7 +3,10 @@ export interface AdaptiveSizeOptions {
   breakpoints: number[];
   lineHeights?: number[];
   steps?: number;
+  properties?: AdaptiveSizeProperties;
 }
+
+type AdaptiveSizeCssVariablesOptions = Omit<AdaptiveSizeOptions, 'properties'>;
 
 type BreakpointItem = {
   fontSize: string;
@@ -50,12 +53,13 @@ export const px2rem = (px: number): string => `${(px / 16).toFixed(4)}rem`;
  * @example adaptiveSize({ sizes: [14, 16], lineHeights: [1.4, 1.67], breakpoints: [320, 960], steps: 10 })
  * @returns {string} Resulting adaptive css font-size string
  */
-export const adaptiveSize = (
-  options: AdaptiveSizeOptions,
+export const adaptiveSize = ({
+  sizes,
+  breakpoints,
+  steps,
+  lineHeights,
   properties = defaultProperties
-): AdaptiveSizeStyles => {
-  const { sizes, breakpoints, steps, lineHeights } = options;
-
+}: AdaptiveSizeOptions): AdaptiveSizeStyles => {
   const mediaQueries = {};
 
   for (let i = 1; i < sizes.length; i += 1) {
@@ -113,10 +117,16 @@ export const adaptiveSize = (
  * @example adaptiveSizeCssVariables("headline", { sizes: [14, 16], lineHeights: [1.4, 1.67], breakpoints: [320, 960], steps: 10 })
  * @returns {string} Resulting adaptive css font-size variables
  */
-export const adaptiveSizeCssVariables = (key: string, options: AdaptiveSizeOptions) => {
-  return adaptiveSize(options, {
-    size: `--${key}-font-size`,
-    lineHeight: `--${key}-line-height`
+export const adaptiveSizeCssVariables = (
+  key: string,
+  options: AdaptiveSizeCssVariablesOptions
+) => {
+  return adaptiveSize({
+    ...options,
+    properties: {
+      size: `--${key}-font-size`,
+      lineHeight: `--${key}-line-height`
+    }
   });
 };
 

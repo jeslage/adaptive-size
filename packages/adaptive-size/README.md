@@ -189,7 +189,7 @@ const Globals = createGlobalStyle`
 
 ## Custom CSS properties
 
-By default `adaptive-size` uses `font-size` as the css property for the `sizes` array and `line-height` as the css property for the `lineHeights` array. But you can also change the properties by adding a `properties` object to your config object.
+By default `adaptive-size` uses `font-size` as the css property for the `sizes` array and `line-height` as the css property for the `lineHeights` array. But you can also change the properties by adding a `properties` key to the options object.
 
 **Example**
 
@@ -197,18 +197,16 @@ By default `adaptive-size` uses `font-size` as the css property for the `sizes` 
 import adaptiveSize from 'adaptive-size';
 
 const Box = styled.div`
-  ${adaptiveSize(
-    {
-      sizes: [20, 45, 60],
-      lineHeights: [1.5, 1.6, 1.5],
-      breakpoints: [800, 1200, 1400],
-      steps: 4
-    },
-    {
+  ${adaptiveSize({
+    sizes: [20, 45, 60],
+    lineHeights: [1.5, 1.6, 1.5],
+    breakpoints: [800, 1200, 1400],
+    steps: 4,
+    properties: {
       size: 'width',
       lineHeight: 'height'
     }
-  )}
+  })}
 `;
 ```
 
@@ -305,3 +303,9 @@ Array of breakpoints in px.
 `number` | optional | default: 8
 
 Number of steps between each breakpoints which will be rendered to the css string.
+
+### `properties`
+
+`{ size: string, lineHeight: string }` | optional | default: `{ size: "font-size", lineHeight: "line-height" }`
+
+Custom properties object
