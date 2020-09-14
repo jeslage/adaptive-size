@@ -59,7 +59,7 @@ $as-properties: (
       $next: nth($breakpoints, $i);
       $current: nth($breakpoints, $i - 1);
 
-      $partialStep: ($next - $current) / ($steps * (length($sizes) - 1));
+      $partialStep: ($next - $current) / $steps;
 
       @for $j from 0 through $steps {
         $width: $current + ($partialStep * $j);

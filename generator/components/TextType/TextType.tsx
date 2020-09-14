@@ -72,13 +72,14 @@ const Type = styled.textarea<TypeProps>`
   ${padding}
   ${border}
 
-  ${(props) =>
-    adaptiveSize({
+  ${(props) => {
+    return adaptiveSize({
       breakpoints: props.breakpoints,
       lineHeights: props.lineHeights,
       steps: props.steps,
       sizes: props.sizes,
-    })}
+    });
+  }}
 `;
 
 const TextType = (props: TextTypeProps) => {

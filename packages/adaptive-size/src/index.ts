@@ -2,7 +2,7 @@ export interface AdaptiveSizeOptions {
   sizes: number[];
   breakpoints: number[];
   lineHeights?: number[];
-  steps?: number;
+  steps?: number | number[];
   properties?: AdaptiveSizeProperties;
 }
 
@@ -56,15 +56,17 @@ export const px2rem = (px: number): string => `${(px / 16).toFixed(4)}rem`;
 export const adaptiveSize = ({
   sizes,
   breakpoints,
-  steps,
+  steps = 8,
   lineHeights,
   properties = defaultProperties
 }: AdaptiveSizeOptions): AdaptiveSizeStyles => {
   const mediaQueries = {};
 
   for (let i = 1; i < sizes.length; i += 1) {
-    const partialStep =
-      (breakpoints[i] - breakpoints[i - 1]) / ((steps || 8) * (sizes.length - 1));
+    // Check if steps is a number else use key from steps array
+    const step = typeof steps === 'number' ? steps : steps[i - 1];
+
+    const partialStep = (breakpoints[i] - breakpoints[i - 1]) / step;
 
     const startIndex = i === 1 ? breakpoints[i - 1] + partialStep : breakpoints[i - 1];
     const endIndex =

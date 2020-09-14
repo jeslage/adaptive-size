@@ -300,9 +300,26 @@ Array of breakpoints in px.
 
 ### `steps`
 
-`number` | optional | default: 8
+`number | number[]` | optional | default: 8
 
-Number of steps between each breakpoints which will be rendered to the css string.
+Number of steps between each breakpoints which will be rendered to the css string. You can also define custom steps for each breakpoint. Be aware that the first item in the `steps` array is used for the second item in the `breakpoints` array, because the first item of the `breakpoints`, `sizes` or `lineHeights` array is the default value.
+
+**Example**
+
+```js
+import adaptiveSize from 'adaptive-size';
+
+const Headline = styled.h1`
+  ${adaptiveSize({
+    sizes: [20, 45, 60],
+    lineHeights: [1.5, 1.6, 1.5],
+    breakpoints: [800, 1200, 1400],
+    // Four steps will be used between 800 – 1200
+    // and eight between 1200 – 1400
+    steps: [4, 8]
+  })}
+`;
+```
 
 ### `properties`
 
