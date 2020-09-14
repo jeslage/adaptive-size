@@ -7,7 +7,7 @@ import Label from "../Label";
 import IconButton from "../IconButton";
 
 export interface RangeProps {
-  iconBefore?: IconTypes;
+  icon?: IconTypes;
   value?: number;
   label?: string;
   description?: string;
@@ -21,7 +21,7 @@ export interface RangeProps {
 }
 
 const Range: FC<RangeProps> = ({
-  iconBefore,
+  icon,
   value = 50,
   label,
   description,
@@ -31,7 +31,7 @@ const Range: FC<RangeProps> = ({
   min = 0,
   max = 100,
   steps = 1,
-  suffix,
+  suffix
 }) => {
   const [val, setVal] = useState(value);
 
@@ -72,7 +72,7 @@ const Range: FC<RangeProps> = ({
   const handleKeyDown = (event) => {
     const {
       key,
-      target: { value },
+      target: { value }
     } = event;
 
     const number = parseFloat(value);
@@ -87,8 +87,8 @@ const Range: FC<RangeProps> = ({
   return (
     <StyledRange>
       <label>
-        {(label || iconBefore) && (
-          <Label label={label} icon={iconBefore} description={description} />
+        {(label || icon) && (
+          <Label label={label} icon={icon} description={description} />
         )}
 
         <span className="range__input">

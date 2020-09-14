@@ -3,13 +3,11 @@ import pascalcase from "pascalcase";
 
 import { useUpdateState, Settings } from "../state";
 
-const useImportExport = (settings?: Settings) => {
+const useImportExport = () => {
   const { updateAllSettings } = useUpdateState();
   const { addToast } = useToasts();
 
-  const exportConfig = async () => {
-    if (!settings) return;
-
+  const exportConfig = async (settings: Settings) => {
     const { project, breakpoints, steps, items, fonts } = settings;
 
     try {
@@ -89,9 +87,7 @@ const useImportExport = (settings?: Settings) => {
     }
   };
 
-  const exportSketchConfig = async () => {
-    if (!settings) return;
-
+  const exportSketchConfig = async (settings: Settings) => {
     const { project, breakpoints, items } = settings;
 
     const buildSketchTypes = () => {

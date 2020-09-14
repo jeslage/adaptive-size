@@ -1,26 +1,13 @@
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, { FC, useEffect, useRef } from "react";
 import * as clipboard from "clipboard-polyfill";
 import { useToasts } from "react-toast-notifications";
 import Prism from "prismjs";
 
+import "prismjs/components/prism-javascript";
+import "prismjs/components/prism-scss";
+
 import Icon from "../Icon";
 import StyledCode from "./Code.style";
-
-const loadLanguage = async (language: "javascript" | "css" | "scss") => {
-  if (language === "javascript") {
-    await import(
-      /* webpackChunkName: "code-js" */ "prismjs/components/prism-javascript"
-    );
-  } else if (language === "css") {
-    await import(
-      /* webpackChunkName: "code-css" */ "prismjs/components/prism-css"
-    );
-  } else if (language === "scss") {
-    await import(
-      /* webpackChunkName: "code-scss" */ "prismjs/components/prism-scss"
-    );
-  }
-};
 
 export interface CodeProps {
   language?: "javascript" | "css" | "scss";
@@ -30,18 +17,15 @@ export interface CodeProps {
 const Code: FC<CodeProps> = ({ language = "css", code }) => {
   const { addToast } = useToasts();
 
-  const [init, setInit] = useState(false);
   const codeBox = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!init) {
-      loadLanguage(language);
-      setInit(true);
-    }
     Prism.highlightAll();
   }, []);
 
-  useEffect(() => Prism.highlightAll(), [code]);
+  useEffect(() => {
+    Prism.highlightAll();
+  }, [code]);
 
   const copyCode = () => {
     addToast("Copied Successfully", {
@@ -55,7 +39,7 @@ const Code: FC<CodeProps> = ({ language = "css", code }) => {
   };
 
   return (
-    <StyledCode init={init}>
+    <StyledCode>
       <div className="code__content">
         <button
           type="button"

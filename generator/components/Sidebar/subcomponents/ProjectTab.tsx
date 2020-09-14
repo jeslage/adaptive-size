@@ -39,13 +39,15 @@ const ProjectTab = () => {
     updateBreakpoint
   } = useBreakpointsState();
 
-  const { importConfig, exportConfig, exportSketchConfig } = useImportExport({
+  const { importConfig, exportConfig, exportSketchConfig } = useImportExport();
+
+  const settings = {
     fonts,
     items,
     project,
     steps,
     breakpoints
-  });
+  };
 
   return (
     <SidebarContent
@@ -59,7 +61,7 @@ const ProjectTab = () => {
             accept="application/json"
           />
 
-          <Button onClick={exportConfig} iconBefore="save">
+          <Button onClick={() => exportConfig(settings)} icon="save">
             Export
           </Button>
         </ProjectBar>
@@ -74,7 +76,7 @@ const ProjectTab = () => {
 
         <Fieldset label="Globals">
           <Counter
-            iconBefore="numberOfParagraphs"
+            icon="numberOfParagraphs"
             label="Steps"
             description="Amount of steps between min and max breakpoint"
             value={steps}
@@ -105,7 +107,7 @@ const ProjectTab = () => {
           {breakpoints.length < 5 && (
             <Button
               onClick={addBreakpoint}
-              iconBefore="textWidth"
+              icon="textWidth"
               variant="secondary"
             >
               Add breakpoint
@@ -117,8 +119,8 @@ const ProjectTab = () => {
 
         <Fieldset label="Sketch">
           <Button
-            onClick={exportSketchConfig}
-            iconBefore="save"
+            onClick={() => exportSketchConfig(settings)}
+            icon="save"
             variant="secondary"
           >
             Export Sketch Config

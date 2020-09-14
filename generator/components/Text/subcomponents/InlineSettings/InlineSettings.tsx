@@ -48,7 +48,7 @@ const InlineSettings: FC<InlineSettingsProps> = ({ item, children }) => {
         {isOpen && (
           <div className="inlineSettings__content">
             <Select
-              iconBefore="fontFamily"
+              icon="fontFamily"
               placeholder={
                 fonts && fonts.length === 0
                   ? "Upload fonts first"
@@ -69,7 +69,7 @@ const InlineSettings: FC<InlineSettingsProps> = ({ item, children }) => {
             />
 
             <Counter
-              iconBefore="letterSpacing"
+              icon="letterSpacing"
               value={item.letterSpacing}
               min={0}
               max={10}
@@ -84,7 +84,7 @@ const InlineSettings: FC<InlineSettingsProps> = ({ item, children }) => {
             {breakpoints.map((element, index) => (
               <Fieldset label={`@ ${element}px`} key={index}>
                 <Range
-                  iconBefore="fontSize"
+                  icon="fontSize"
                   suffix="px"
                   value={item.sizes[index]}
                   min={1}
@@ -101,7 +101,7 @@ const InlineSettings: FC<InlineSettingsProps> = ({ item, children }) => {
                 />
 
                 <Counter
-                  iconBefore="lineHeight"
+                  icon="lineHeight"
                   value={item.lineHeights[index]}
                   min={0.1}
                   max={5}

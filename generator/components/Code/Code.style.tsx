@@ -1,10 +1,6 @@
 import styled from "styled-components";
 
-type StyledCodeProps = {
-  readonly init: boolean;
-};
-
-const StyledCode = styled.div<StyledCodeProps>`
+const StyledCode = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -34,8 +30,6 @@ const StyledCode = styled.div<StyledCodeProps>`
 
   pre {
     margin: 0;
-    transition: opacity 0.2s ease-in-out;
-    opacity: ${(props) => (props.init ? "1" : 0)};
   }
 
   code[class*="language-"],

@@ -13,7 +13,7 @@ type Option = {
 
 export interface SelectProps {
   options: Option[];
-  iconBefore?: IconTypes;
+  icon?: IconTypes;
   initialValue: string;
   placeholder?: string;
   label?: string;
@@ -25,14 +25,14 @@ export interface SelectProps {
 
 const Select: FC<SelectProps> = ({
   options,
-  iconBefore,
+  icon,
   description,
   initialValue,
   label,
   placeholder,
   name,
   disabled,
-  onChange,
+  onChange
 }) => {
   const [currentValue, setCurrentValue] = useState(initialValue);
 
@@ -53,8 +53,8 @@ const Select: FC<SelectProps> = ({
   return (
     <StyledSelect>
       <label>
-        {(label || iconBefore) && (
-          <Label label={label} icon={iconBefore} description={description} />
+        {(label || icon) && (
+          <Label label={label} icon={icon} description={description} />
         )}
 
         <select

@@ -1,17 +1,18 @@
 import React, { useContext } from "react";
 import { useToasts } from "react-toast-notifications";
 import Head from "next/head";
-import pascalcase from "pascalcase";
 
 import { useUpdateState, defaultConfig, Settings } from "../../state";
+import { decodeConfig, getFontStyle } from "../../helper";
 import { PresetsContext } from "../../contexts";
+
+import useImportExport from "../../hooks/useImportExport";
 
 import Button from "../Button";
 import Preset from "../Preset";
+import TextType from "../TextType";
 
 import StyledPresetList from "./PresetList.style";
-import { decodeConfig, getFontStyle } from "../../helper";
-import TextType from "../TextType";
 
 const PresetList = () => {
   const { addToast } = useToasts();
@@ -19,37 +20,7 @@ const PresetList = () => {
   const { settings, updateAllSettings } = useUpdateState();
   const { addPreset, removePreset, presets } = useContext(PresetsContext);
 
-  const handleExport = async (item: Settings) => {
-    try {
-      const json = await JSON.stringify(item);
-      var blob = new Blob([json], { type: "application/json" });
-
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement("a");
-
-      link.href = url;
-      link.setAttribute(
-        "download",
-        `${pascalcase(
-          item.project.name
-        )}_adaptive-size-config_${Date.now()}.json`
-      );
-
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-
-      addToast("Exported config successfully", {
-        appearance: "success",
-        autoDismiss: true
-      });
-    } catch (err) {
-      addToast("Something went wrong", {
-        appearance: "error",
-        autoDismiss: true
-      });
-    }
-  };
+  const { exportConfig } = useImportExport();
 
   return (
     <StyledPresetList>
@@ -96,7 +67,7 @@ const PresetList = () => {
                       label: "Export config",
                       icon: "save",
                       callback: () => {
-                        handleExport(decodedSettings.settings);
+                        exportConfig(decodedSettings.settings);
                       }
                     },
                     {
@@ -127,7 +98,7 @@ const PresetList = () => {
             );
           })
         ) : (
-          <Button onClick={() => addPreset(settings)} iconBefore="plus">
+          <Button onClick={() => addPreset(settings)} icon="plus">
             Add your first preset
           </Button>
         )}
@@ -135,7 +106,7 @@ const PresetList = () => {
 
       {presets.length > 0 ? (
         <div className="presetList__bar">
-          <Button onClick={() => addPreset(settings)} iconBefore="plus">
+          <Button onClick={() => addPreset(settings)} icon="plus">
             Add another preset
           </Button>
         </div>

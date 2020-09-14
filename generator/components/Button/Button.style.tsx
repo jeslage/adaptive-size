@@ -41,12 +41,8 @@ const StyledButton = styled.button<StyledButtonProps>`
     fill: var(--colors-lightest);
   }
 
-  .button__icon-before {
+  .button__icon {
     margin-right: 10px;
-  }
-
-  .button__icon-after {
-    margin-left: 10px;
   }
 
   ${(props) =>

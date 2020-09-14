@@ -50,7 +50,7 @@ const SettingsBar = () => {
 
   return (
     <StyledSettingsBar>
-      <Button onClick={addItem} iconBefore="fontFamily">
+      <Button onClick={addItem} icon="fontFamily">
         Add text type
       </Button>
 
@@ -81,7 +81,7 @@ const SettingsTab = () => {
             onRemove={items.length > 1 ? () => removeItem(item.id) : undefined}
           >
             <Select
-              iconBefore="fontFamily"
+              icon="fontFamily"
               placeholder={
                 fonts && fonts.length === 0
                   ? "Upload fonts first"
@@ -102,7 +102,7 @@ const SettingsTab = () => {
             />
 
             <Counter
-              iconBefore="letterSpacing"
+              icon="letterSpacing"
               value={item.letterSpacing}
               min={0}
               max={10}
@@ -117,7 +117,7 @@ const SettingsTab = () => {
             {breakpoints.map((element, index) => (
               <Fieldset label={`${item.name} @ ${element}px`} key={index}>
                 <Range
-                  iconBefore="fontSize"
+                  icon="fontSize"
                   suffix="px"
                   value={item.sizes[index]}
                   min={1}
@@ -135,7 +135,7 @@ const SettingsTab = () => {
 
                 <Counter
                   key={index}
-                  iconBefore="lineHeight"
+                  icon="lineHeight"
                   value={item.lineHeights[index]}
                   min={0.1}
                   max={5}

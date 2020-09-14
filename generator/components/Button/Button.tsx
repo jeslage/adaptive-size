@@ -5,8 +5,7 @@ import StyledButton from "./Button.style";
 import Icon, { IconTypes } from "../Icon";
 
 export interface ButtonProps {
-  iconBefore?: IconTypes;
-  iconAfter?: IconTypes;
+  icon?: IconTypes;
   variant?: "primary" | "secondary";
   className?: string;
   disabled?: boolean;
@@ -17,8 +16,7 @@ export interface ButtonProps {
 
 const Button: FC<ButtonProps> = ({
   children,
-  iconBefore,
-  iconAfter,
+  icon,
   variant = "primary",
   disabled = false,
   onClick,
@@ -36,17 +34,12 @@ const Button: FC<ButtonProps> = ({
     title={title}
     {...props}
   >
-    {iconBefore && (
-      <span className="button__icon-before">
-        <Icon type={iconBefore} />
+    {icon && (
+      <span className="button__icon">
+        <Icon type={icon} />
       </span>
     )}
     {children}
-    {iconAfter && (
-      <span className="button__icon-after">
-        <Icon type={iconAfter} />
-      </span>
-    )}
   </StyledButton>
 );
 

@@ -21,9 +21,7 @@ const PresetsProvider = ({ children }) => {
   useEffect(() => {
     const initialPresets = window.localStorage.getItem("presets");
 
-    if (initialPresets) {
-      setPresets(decodeConfig(initialPresets));
-    }
+    if (initialPresets) setPresets(decodeConfig(initialPresets));
   }, []);
 
   // Set cookies
@@ -32,20 +30,17 @@ const PresetsProvider = ({ children }) => {
   }, [presets]);
 
   const addPreset = (settings: Settings) => {
-    const obj = {
-      dateCreated: Date.now(),
-      settings
-    };
-
-    setPresets((prev) => [obj, ...prev]);
+    setPresets((prev) => [
+      {
+        dateCreated: Date.now(),
+        settings
+      },
+      ...prev
+    ]);
   };
 
   const removePreset = (timestamp) => {
-    const newPresets = presets.filter(
-      (preset) => preset.dateCreated !== timestamp
-    );
-
-    setPresets(newPresets);
+    setPresets((prev) => prev.filter((i) => i.dateCreated !== timestamp));
   };
 
   return (

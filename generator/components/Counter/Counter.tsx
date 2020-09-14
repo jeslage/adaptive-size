@@ -7,7 +7,7 @@ import IconButton from "../IconButton";
 import Label from "../Label";
 
 export interface CounterProps {
-  iconBefore?: IconTypes;
+  icon?: IconTypes;
   label?: string;
   onChange?: (val: number) => void;
   value: number;
@@ -27,7 +27,7 @@ const Counter: FC<CounterProps> = ({
   steps = 1,
   onChange,
   suffix,
-  iconBefore
+  icon
 }) => {
   const updateValue = (val: number) => {
     if (onChange) onChange(Math.round(val * 100) / 100);
@@ -58,8 +58,8 @@ const Counter: FC<CounterProps> = ({
 
   return (
     <StyledCounter>
-      {(label || iconBefore) && (
-        <Label icon={iconBefore} label={label} description={description} />
+      {(label || icon) && (
+        <Label icon={icon} label={label} description={description} />
       )}
 
       <div className="counter">

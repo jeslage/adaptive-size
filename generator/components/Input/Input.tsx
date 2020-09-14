@@ -5,7 +5,7 @@ import { IconTypes } from "../Icon";
 import Label from "../Label";
 
 export interface InputProps {
-  iconBefore?: IconTypes;
+  icon?: IconTypes;
   label?: string;
   type?: string;
   value: string;
@@ -17,16 +17,16 @@ export interface InputProps {
 const Input: FC<InputProps> = ({
   label,
   description,
-  iconBefore,
+  icon,
   type = "text",
   value,
   onChange
 }) => {
   return (
     <StyledInput>
-      {(label || iconBefore) && (
+      {(label || icon) && (
         <label htmlFor={label?.replace(" ", "")}>
-          <Label icon={iconBefore} label={label} description={description} />
+          <Label icon={icon} label={label} description={description} />
         </label>
       )}
 
