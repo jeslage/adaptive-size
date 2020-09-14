@@ -59,9 +59,15 @@ $as-properties: (
       $next: nth($breakpoints, $i);
       $current: nth($breakpoints, $i - 1);
 
-      $partialStep: ($next - $current) / $steps;
+      // Check if step is number or list
+      $step: $steps;
+      @if type-of($step) == list {
+        $step: nth($steps, $i - 1);
+      }
 
-      @for $j from 0 through $steps {
+      $partialStep: ($next - $current) / $step;
+
+      @for $j from 0 through $step {
         $width: $current + ($partialStep * $j);
 
         $fontSize: interpolate(
