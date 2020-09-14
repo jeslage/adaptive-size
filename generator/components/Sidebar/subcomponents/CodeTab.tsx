@@ -1,13 +1,9 @@
 import React from "react";
 
-import {
-  useFontsState,
-  useItemsState,
-  useBreakpointsState,
-  useStepsState
-} from "../../../state";
+import { useUpdateState } from "../../../state";
 
 import Code from "../../Code";
+
 import getJS from "../../Code/helper/javascript";
 import getSCSS from "../../Code/helper/scss";
 
@@ -16,10 +12,8 @@ import { Tabs } from "../../Tabs";
 import Tab from "../../Tabs/Tab";
 
 const CodeTab = () => {
-  const { fonts } = useFontsState();
-  const { items } = useItemsState();
-  const { breakpoints } = useBreakpointsState();
-  const { steps } = useStepsState();
+  const { settings } = useUpdateState();
+  const { fonts, items, breakpoints, steps } = settings;
 
   return (
     <SidebarContent>

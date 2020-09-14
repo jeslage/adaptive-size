@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
+import { useFontsState } from "../../state";
+
 import { getFontExtension } from "../../helper";
 
 import Upload from "../Upload";
 import IconButton from "../IconButton";
 import Fieldset from "../Fieldset";
-import { useFontsState } from "../../state";
 
 const StyledFontList = styled(Fieldset)`
   margin: var(--spacings-s) 0 var(--spacings-xs);
@@ -90,6 +91,7 @@ const FontList = () => {
           ))}
         </div>
       )}
+
       <Upload
         onChange={handleFileUpload}
         accept=".woff, .woff2"

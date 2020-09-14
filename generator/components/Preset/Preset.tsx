@@ -27,11 +27,6 @@ export interface PresetProps {
   dateCreated?: number;
   onClick?: () => void;
   options?: PresetOptionsType[];
-  additionalOptions?: Array<{
-    label: string;
-    callback: () => void;
-  }>;
-
   className?: string;
 }
 
@@ -39,10 +34,9 @@ const Preset: FC<PresetProps> = ({
   dateCreated,
   onClick,
   options,
-  additionalOptions,
   className,
   name,
-  children,
+  children
 }) => {
   return (
     <StyledPreset className={className}>
@@ -70,11 +64,7 @@ const Preset: FC<PresetProps> = ({
               )}
             </span>
 
-            <PresetOptions
-              options={options}
-              additionalOptions={additionalOptions}
-              className="preset__options"
-            />
+            <PresetOptions options={options} className="preset__options" />
           </div>
         </div>
       </div>

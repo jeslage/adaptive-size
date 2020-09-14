@@ -16,7 +16,7 @@ import TextType from "../TextType";
 const PresetList = () => {
   const { addToast } = useToasts();
 
-  const { updateAllSettings } = useUpdateState();
+  const { settings, updateAllSettings } = useUpdateState();
   const { addPreset, removePreset, presets } = useContext(PresetsContext);
 
   const handleExport = async (item: Settings) => {
@@ -127,7 +127,7 @@ const PresetList = () => {
             );
           })
         ) : (
-          <Button onClick={() => addPreset()} iconBefore="plus">
+          <Button onClick={() => addPreset(settings)} iconBefore="plus">
             Add your first preset
           </Button>
         )}
@@ -135,7 +135,7 @@ const PresetList = () => {
 
       {presets.length > 0 ? (
         <div className="presetList__bar">
-          <Button onClick={() => addPreset()} iconBefore="plus">
+          <Button onClick={() => addPreset(settings)} iconBefore="plus">
             Add another preset
           </Button>
         </div>

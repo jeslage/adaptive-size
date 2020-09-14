@@ -44,6 +44,7 @@ const SettingsBar = () => {
       appearance: "success",
       autoDismiss: true
     });
+
     resetSettings();
   };
 

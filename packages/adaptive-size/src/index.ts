@@ -83,14 +83,16 @@ export const adaptiveSize = ({
 
       const lh = lineHeights
         ? {
-            [properties.lineHeight]: parseFloat(
-              interpolate(
-                j,
-                breakpoints[i - 1],
-                breakpoints[i],
-                lineHeights[i - 1],
-                lineHeights[i]
-              ).toFixed(2)
+            [properties.lineHeight]: px2rem(
+              parseFloat(
+                interpolate(
+                  j,
+                  breakpoints[i - 1],
+                  breakpoints[i],
+                  lineHeights[i - 1],
+                  lineHeights[i]
+                ).toFixed(2)
+              ) * value
             )
           }
         : undefined;
@@ -107,7 +109,9 @@ export const adaptiveSize = ({
 
   return {
     [properties.size]: px2rem(sizes[0]),
-    ...(lineHeights ? { [properties.lineHeight]: lineHeights[0] } : undefined),
+    ...(lineHeights
+      ? { [properties.lineHeight]: px2rem(lineHeights[0] * sizes[0]) }
+      : undefined),
     ...mediaQueries
   };
 };

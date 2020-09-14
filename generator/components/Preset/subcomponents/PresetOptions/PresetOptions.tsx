@@ -9,24 +9,15 @@ export interface PresetOptionsProps {
     callback: () => void;
     icon: IconTypes;
   }>;
-  additionalOptions?: Array<{
-    label: string;
-    callback: () => void;
-  }>;
   className?: string;
 }
 
-const PresetOptions: FC<PresetOptionsProps> = ({
-  options,
-  additionalOptions,
-  className
-}) => {
-  const [visible, setVisible] = useState<boolean>(false);
+const PresetOptions: FC<PresetOptionsProps> = ({ options, className }) => {
   return (
     <StyledPresetOptions className={className}>
       {options &&
         options.length > 0 &&
-        options.map(item => (
+        options.map((item) => (
           <IconButton
             key={item.label}
             icon={item.icon}
@@ -34,31 +25,6 @@ const PresetOptions: FC<PresetOptionsProps> = ({
             onClick={item.callback}
           />
         ))}
-
-      {additionalOptions && additionalOptions.length > 0 ? (
-        <>
-          <IconButton
-            icon="dots"
-            label="Additional Options"
-            onClick={() => setVisible(prev => !prev)}
-            className="presetOptions__additional-toggle"
-          />
-          {visible && (
-            <div
-              className="presetOptions__list"
-              onMouseLeave={() => setVisible(false)}
-            >
-              {additionalOptions.map(item => (
-                <button key={item.label} type="button" onClick={item.callback}>
-                  {item.label}
-                </button>
-              ))}
-            </div>
-          )}
-        </>
-      ) : (
-        ""
-      )}
     </StyledPresetOptions>
   );
 };

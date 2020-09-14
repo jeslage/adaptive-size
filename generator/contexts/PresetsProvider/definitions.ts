@@ -7,6 +7,6 @@ export type Preset = {
 
 export interface PresetsContextProps {
   presets: Preset[];
-  addPreset: () => void;
+  addPreset: (settings: Settings) => void;
   removePreset: (timestamp: number) => void;
 }

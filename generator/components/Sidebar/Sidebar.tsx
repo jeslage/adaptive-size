@@ -2,17 +2,18 @@ import React, { FC, ReactNode, useState } from "react";
 import dynamic from "next/dynamic";
 import styled from "styled-components";
 
-// Subcomponents
-import PresetList from "../PresetList";
+import { PresetsProvider } from "../../contexts";
 
-import StyledSidebar, { StyledSidebarContent } from "./Sidebar.style";
+import PresetList from "../PresetList";
+import Tab from "../Tabs/Tab";
 
 import CodeTab from "./subcomponents/CodeTab";
 import SettingsTab from "./subcomponents/SettingsTab";
 import ProjectTab from "./subcomponents/ProjectTab";
 import LoadingIndicator from "../LoadingIndicator";
 
-import Tab from "../Tabs/Tab";
+import StyledSidebar, { StyledSidebarContent } from "./Sidebar.style";
+
 const Tabs = dynamic(() => import("../Tabs/Tabs"), {
   ssr: false,
   loading: () => <LoadingIndicator />
@@ -49,7 +50,15 @@ const Sidebar: FC<SidebarProps> = ({ className }) => {
   const items = [
     { label: "Types", key: "textTypes", content: <SettingsTab /> },
     { label: "Project", key: "project", content: <ProjectTab /> },
-    { label: "Presets", key: "presets", content: <PresetList /> },
+    {
+      label: "Presets",
+      key: "presets",
+      content: (
+        <PresetsProvider>
+          <PresetList />
+        </PresetsProvider>
+      )
+    },
     { label: "Code", key: "code", content: <CodeTab /> }
   ];
 

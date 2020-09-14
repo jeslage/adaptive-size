@@ -42,7 +42,7 @@ const StyledToast = styled.div`
 const Toast: FC<ToastProps> = ({ appearance, children }) => (
   <StyledToast>
     <div className="toast__icon">
-      <Icon type={appearance === "error" ? "check" : "check"} />
+      <Icon type={appearance === "error" ? "close" : "check"} />
     </div>
     <span>{children}</span>
   </StyledToast>

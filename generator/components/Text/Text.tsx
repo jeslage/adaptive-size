@@ -1,5 +1,4 @@
-import React, { FC, useState, useEffect, useMemo } from "react";
-import throttle from "lodash.throttle";
+import React, { FC, useMemo } from "react";
 import Head from "next/head";
 
 import {
@@ -10,30 +9,18 @@ import {
   useItemsState,
   defaultConfig
 } from "../../state";
+import { getFontStyle } from "../../helper";
+
+import TextType from "../TextType";
+
+import InlineSettings from "./subcomponents/InlineSettings/InlineSettings";
+import InnerWidthIndicator from "./subcomponents/InnerWidthIndicator/InnerWidthIndicator";
 
 import StyledText from "./Text.style";
-import InlineSettings from "./subcomponents/InlineSettings/InlineSettings";
-import TextType from "../TextType";
-import { getFontStyle } from "../../helper";
+
 export interface TextProps {
   className?: string;
 }
-
-const InnerWidth = () => {
-  const [innerWidth, setInnerWidth] = useState(0);
-
-  const handleResize = throttle(() => {
-    setInnerWidth(window.innerWidth);
-  }, [400]);
-
-  useEffect(() => {
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  return <span className="text__innerWidth">{innerWidth}px</span>;
-};
 
 const Text: FC<TextProps> = ({ className }) => {
   const { project, updateProject } = useProjectState();
@@ -60,7 +47,7 @@ const Text: FC<TextProps> = ({ className }) => {
     <StyledText className={className}>
       {renderFonts}
 
-      <InnerWidth />
+      <InnerWidthIndicator />
 
       <a
         href="https://github.com/jeslage/adaptive-size"
@@ -103,4 +90,4 @@ const Text: FC<TextProps> = ({ className }) => {
   );
 };
 
-export default Text;
+export default React.memo(Text) as typeof Text;
