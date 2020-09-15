@@ -1,3 +1,5 @@
+# 🚧 Work in progress 🚧
+
 # Adaptive Size
 
 [![codecov](https://codecov.io/gh/jeslage/adaptive-size/branch/master/graph/badge.svg?token=TJJFPD677O)](https://codecov.io/gh/jeslage/adaptive-size)
@@ -6,8 +8,8 @@
 A small javascript helper to get an adaptive font-size css string. It will interpolate between the given sizes and screen widths.
 
 ```bash
+// Not published yet!
 yarn add adaptive-size
-
 npm install adaptive-size
 ```
 

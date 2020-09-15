@@ -1,20 +1,22 @@
+# 🚧 Work in progress 🚧
+
 # Adaptive Size SCSS
 
 A small scss mixin to get an adaptive font-size css string. It will interpolate between the given sizes and screen widths.
 
 ```scss
-@import "adaptive-size-scss";
+@import 'adaptive-size-scss';
 
 $as-globals: (
   breakpoints: 800 1200 1400,
-  steps: 8
+  steps: 8,
 );
 
 h4 {
   @include adaptive-size(
     (
       sizes: 20 45 60,
-      lineHeights: 1.5 1.6 1.5
+      lineHeights: 1.5 1.6 1.5,
     )
   );
 }
